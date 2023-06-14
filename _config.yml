@@ -43,6 +43,11 @@ theme: minimal-mistakes-jekyll
 plugins:
   - jekyll-feed
 
+collections:
+  news: 
+    output: true
+    permalink: /:collection/:path/
+
 
 defaults:
   # _posts
