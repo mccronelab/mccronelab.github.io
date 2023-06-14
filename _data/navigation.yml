@@ -1,0 +1,13 @@
+main:
+  - title: "research"
+    url: /research/
+  - title: "people"
+    url: /people/
+  - title: "papers"
+    url: /papers/
+  - title: "news"
+    url: /news/
+  # - title: "projects"
+  #   url: /projects/
+  - title: "contact"
+    url: /contact/
