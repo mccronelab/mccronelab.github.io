@@ -67,11 +67,11 @@ scholar:
   style: apa
   locale: en
 
-  sort_by: none
-  order: ascending
+  sort_by: year
+  order: descending
 
-  group_by: none
-  group_order: ascending
+  group_by: year
+  group_order: descending
 
   source: ./_bibliography
   bibliography: collapsed.bib

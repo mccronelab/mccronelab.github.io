@@ -4,9 +4,6 @@ title: Contact
 permalink: /contact/
 ---
 
-JT McCrone, PhD
-
-Vaccine and Infectious Disease Division  
 Fred Hutchinson Cancer Center
 
 Office: E2-147
