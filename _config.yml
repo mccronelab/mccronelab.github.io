@@ -75,7 +75,8 @@ scholar:
 
   source: ./_bibliography
   bibliography: collapsed.bib
-  bibliography_template: ""
+  bibliography_template: "{{ reference | replace_first: 'McCrone, J. T.', '<b>McCrone, J. T</b>' }}"
+
 
   replace_strings: true
   join_strings:    true
