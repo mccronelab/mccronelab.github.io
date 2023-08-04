@@ -1,0 +1,23 @@
+
+.person{
+    margin: 2em 0;
+}
+.person-photo {
+    float: left;
+    margin-right: 2em;
+}
+.name{
+    margin-bottom: .5em;
+    line-height: 1.2em;
+    font-weight: bold;
+}
+
+.position {
+    margin-bottom: .1em;
+    line-height: 1.2em;
+    font-weight: 200;
+}
+
+.blerb {
+    font-size: .7em;
+}

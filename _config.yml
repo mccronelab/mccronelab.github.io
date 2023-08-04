@@ -17,7 +17,7 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-
+plugins: ['jekyll/scholar']
 title: McCrone Lab
 name: JT McCrone
 email: your-email@example.com
@@ -29,10 +29,10 @@ url: "htts://mccronelab.github.io" # the base hostname & protocol for your site,
 github_username:  mccronelab
 repository: mccronelab/site
 
+logo: assets/images/McCrone_Lab_Logo.jpg
+
 atom_feed:
   hide: true
-
-
 
 masthead_title: "McCrone Lab"
 
@@ -43,12 +43,14 @@ theme: minimal-mistakes-jekyll
 plugins:
   - jekyll-feed
 
+collections_dir: collections
+
 collections:
-  news: 
+  people:
     output: true
-    permalink: /:collection/:path/
-
-
+  news:
+    output: true
+    
 defaults:
   # _posts
   - scope:
@@ -61,6 +63,30 @@ defaults:
       share: true
       related: true
 
+scholar:
+  style: apa
+  locale: en
+
+  sort_by: none
+  order: ascending
+
+  group_by: none
+  group_order: ascending
+
+  source: ./_bibliography
+  bibliography: collapsed.bib
+  bibliography_template: ""
+
+  replace_strings: true
+  join_strings:    true
+
+  use_raw_bibtex_entry: false
+
+  details_dir:    bibliography
+  details_layout: bibtex.html
+  details_link:   Details
+
+  query: "@*"
 # Exclude from processing.
 # The following items will not be processed, by default.
 # Any item listed under the `exclude:` key here will be automatically added to

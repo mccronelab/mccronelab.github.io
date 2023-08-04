@@ -7,7 +7,7 @@ title: Research
 
 
 RNA viruses evolve rapidly and accumulate mutations as outbreaks grow and spread.
-Because viral evolution is simultaneous with epidemiological growth, the evolutionary relationships among sequenced cases records important information about the processes that drive epidemics.
+Because viral evolution is simultaneous with epidemiological growth, the evolutionary relationships among sequenced cases record important information about the processes that drive epidemics.
 In the McCrone lab we use computational biology and phylogenetics to estimate these relationships and understand their implications for pathogen transmission.
 
 
