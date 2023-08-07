@@ -29,7 +29,7 @@ url: "htts://mccronelab.github.io" # the base hostname & protocol for your site,
 github_username:  mccronelab
 repository: mccronelab/site
 
-logo: assets/images/McCrone_Lab_Logo.jpg
+logo: assets/images/McCrone_Lab_Logo_3_grey.png
 
 atom_feed:
   hide: true
@@ -75,8 +75,7 @@ scholar:
 
   source: ./_bibliography
   bibliography: collapsed.bib
-  bibliography_template: "{{ reference | replace_first: 'McCrone, J. T.', '<b>McCrone, J. T</b>' }}"
-
+  bibliography_template: "{{ reference | replace_first: 'McCrone, J. T.', '<b>McCrone, J. T.</b>'| replace_first: 'McCrone*, J. T.', '<b>McCrone*, J. T.</b>' |replace_first: 'McCrone, J.', '<b>McCrone, J.</b>'}}"
 
   replace_strings: true
   join_strings:    true
