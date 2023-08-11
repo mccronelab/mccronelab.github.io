@@ -24,10 +24,10 @@ email: your-email@example.com
 description: >- # this means to ignore newlines until "baseurl:"
   Virus evolution and phylodynamcis at the Fred Hutch.
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "htts://mccronelab.github.io" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://mccronelab.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 # twitter_username: jekyllrb
 github_username:  mccronelab
-repository: mccronelab/lab-web-site
+repository: mccronelab/mccronelab.github.io
 
 logo: assets/images/McCrone_Lab_Logo_3_grey.png
 
