@@ -20,7 +20,7 @@ intro:
     # title: "Placeholder Image Left Aligned"
     excerpt: 'We use large datasets to uncover how processes within infected hosts and across continents shape pathogen diversity and impact human health.
 In the lab we rely on genomic sequencing, computational biology, and phylogenetics to decode past events and understand current trends in virus evolution and epidemiology. 
-If that sounds fun please get in touch! We are always interested in new team members and can work with students from any UW graduate program.   
+If that sounds fun please get in touch! We are always interested in new team members and can work with students from any UW graduate program.'  
     url: "/research/"
     btn_label: "Read More"
     btn_class: "btn--primary"
