@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <!-- <title>Title</title> -->
-    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="/assets/talks/assets/js/d3.v7.min.js"></script>
     <script src="/assets/talks/assets/js/legend.js"></script>
     <script src="/assets/talks/assets/js/constants.js"></script>
     <script src="/assets/talks/assets/js/datFormat.js"></script>
@@ -14,8 +14,7 @@
 <body>
 <div class="figure-div" id="fig" ></div>
 <script type="module">
-    // import {Tree,FigTree,circle,axis,tipLabel,rootToTipLayout,trendLine,textAnnotation} from "https://cdn.jsdelivr.net/gh/rambaut/figtree.js@94fa/dist/figtree.esm.js";
-    import {Tree,FigTree,roughCircle,circle,axis,roughBranch,predicatedRootToTipLayout,tipLabel,rootToTipLayout,branch,trendLine,textAnnotation,rectangularLayout} from "https://cdn.jsdelivr.net/gh/rambaut/figtree.js@27e9/dist/figtree.esm.js";
+    import {Tree,FigTree,roughCircle,circle,axis,roughBranch,predicatedRootToTipLayout,tipLabel,rootToTipLayout,branch,trendLine,textAnnotation,rectangularLayout} from "/assets/talks/assets/js/figtree.esm.27e9.js";
     const height=300;
     const svgSelection = d3.select("#fig")
         .append("svg")
@@ -167,8 +166,7 @@
 <!--<script type="module">-->
 
 
-<!--    // import {Tree,FigTree,circle,axis,tipLabel,rootToTipLayout,trendLine,textAnnotation} from "https://cdn.jsdelivr.net/gh/rambaut/figtree.js@94fa/dist/figtree.esm.js";-->
-<!--    import {Tree,FigTree,circle,axis,tipLabel,rootToTipLayout,branch,trendLine,textAnnotation,rectangularLayout} from "https://cdn.jsdelivr.net/gh/rambaut/figtree.js@27e9/dist/figtree.esm.js";-->
+<!--    import {Tree,FigTree,circle,axis,tipLabel,rootToTipLayout,branch,trendLine,textAnnotation,rectangularLayout} from "/assets/talks/assets/js/figtree.esm.27e9.js";-->
 <!--    const width = 750,-->
 <!--        height = 300;-->
 <!--    const svgSelection = d3.select("#fig")-->

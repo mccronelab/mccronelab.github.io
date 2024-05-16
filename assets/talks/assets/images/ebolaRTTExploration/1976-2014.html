@@ -2,10 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <script src="https://d3js.org/d3.v7.min.js"></script>
-    <script src="https://unpkg.com/topojson@3"></script>
-    <script src="https://cdn.jsdelivr.net/npm/d3-geo@3"></script>
-    <script src="https://cdn.jsdelivr.net/npm/d3-geo-projection@4"></script>
+    <script src="/assets/talks/assets/js/d3.v7.min.js"></script>
+    <script src="/assets/talks/assets/js/topojson@3"></script>
+    <script src="/assets/talks/assets/js/d3-geo@3"></script>
+    <script src="/assets/talks/assets/js/d3-geo-projection@4"></script>
     <script src="/assets/talks/assets/js/legend.js"></script>
     <script src="/assets/talks/assets/js/constants.js"></script>
     <link rel="stylesheet" href="/assets/talks/assets/css/figure.css" />
@@ -13,7 +13,6 @@
   <body>
     <div class="figure-div" id="fig"></div>
     <script type="module">
-      // import {Tree,FigTree,circle,axis,tipLabel,rootToTipLayout,trendLine,textAnnotation} from "https://cdn.jsdelivr.net/gh/rambaut/figtree.js@94fa/dist/figtree.esm.js";
       import {
         Tree,
         FigTree,
@@ -29,7 +28,7 @@
         rectangularLayout,
         equalAngleLayout,
         reverseNunoLayout,
-      } from "https://cdn.jsdelivr.net/gh/rambaut/figtree.js@9a3e/dist/figtree.esm.js";
+      } from "/assets/talks/assets/js/figtree.esm.9a3e.js";
       const width = 900,
         height = 500;
       const svgSelection = d3

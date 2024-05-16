@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <!-- <title>Title</title> -->
-    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="/assets/talks/assets/js/d3.v7.min.js"></script>
 
-    <script src="https://unpkg.com/topojson@3"></script>
+    <script src="/assets/talks/assets/js/topojson@3"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/d3-geo@3"></script>
-    <script src="https://cdn.jsdelivr.net/npm/d3-geo-projection@4"></script>
+    <script src="/assets/talks/assets/js/d3-geo@3"></script>
+    <script src="/assets/talks/assets/js/d3-geo-projection@4"></script>
 
     <script src="/assets/talks/assets/js/legend.js"></script>
     <script src="/assets/talks/assets/js/constants.js"></script>
@@ -22,8 +22,7 @@
 <script type="module">
 
 
-    // import {Tree,FigTree,circle,axis,tipLabel,rootToTipLayout,trendLine,textAnnotation} from "https://cdn.jsdelivr.net/gh/rambaut/figtree.js@94fa/dist/figtree.esm.js";
-    import {Tree,FigTree,circle,axis,axisBars,branchLabel,branch,tipLabel,textAnnotation,rectangularLayout} from "https://cdn.jsdelivr.net/gh/rambaut/figtree.js@27e9/dist/figtree.esm.js";
+    import {Tree,FigTree,circle,axis,axisBars,branchLabel,branch,tipLabel,textAnnotation,rectangularLayout} from "/assets/talks/assets/js/figtree.esm.27e9.js";
 
     const svgSelection = d3.select("#fig")
         .append("svg")
