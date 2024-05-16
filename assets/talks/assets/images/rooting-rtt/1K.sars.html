@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<!-- <title>Title</title> -->
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="/assets/talks/assets/js/constants.js"></script>
+ <link rel="stylesheet" href="/assets/talks/assets/css/figure.css" />
+
+
+</head>
+<body>
+<div class="figure-div" id="fig" ></div>
+<style>
+.branch .branch-path {
+    fill: none;
+    /* stroke: #541753;*/ 
+    stroke-width: 2px; 
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    cursor: pointer;
+}
+</style>
+<script type="module">
+    import {Tree,FigTree,roughBranch,roughCircle,rectangle,axis,axisBars,trendLine,circle,branch,tipLabel,textAnnotation,rectangularLayout,equalAngleLayout,rootToTipLayout,reverseNunoLayout} from "https://cdn.jsdelivr.net/gh/rambaut/figtree.js@9a3e/dist/figtree.esm.js";
+
+    const svgSelection = d3.select("#fig")
+        .append("svg")
+        .attr("class","tree")
+        .attr("id","figtree")
+        .attr("width",width)
+        .attr("height",height)
+
+
+    const  margins={top:20,
+        bottom:100,
+        left:10,
+        right:100};
+
+        fetch("data/1K.rooted.nexus").then(t=>t.text())
+        .then(text=>{
+            return Tree.parseNexus(text,{datePrefix: "|",dateFormat:"%Y-%m-%d"})[0]
+        }).then(baseTimeTree=>{
+
+            const annotateHover=(nodes)=>{
+                nodes.forEach(node=>{
+                    baseTimeTree.annotateNode(node,{hover:!node.annotations.hover});
+                });
+                baseTimeTree.treeUpdateCallback()
+            };
+
+
+            const colorScale = d3.scaleSequential(d3.interpolateBlues).domain(d3.extent(baseTimeTree.externalNodes.map(n=>n.annotations.date)))
+
+            console.log(baseTimeTree.externalNodes.map(n=>n.annotations.date))
+            const rootedFigTree = new FigTree(document.getElementById("figtree"),margins,baseTimeTree)
+                                        .layout(rectangularLayout)
+                                        .nodes(
+                                            circle()
+                                                .filter(n=>!n.children)
+                                                .attr("r",n=>n.annotations.hovered?5:3)
+                                                .attr("fill",d=>"lightgrey")
+                                                .rotateOnClick()
+                                                .annotateOnHover("hovered")
+                                        )
+                                        .nodeBackgrounds(
+                                            circle()
+                                            .filter(n=>!n.children)
+                                            .attr("r",4)
+                                            .attr("fill","black")
+                                            .rotateOnClick("false")
+                                        )
+                                        .branches(
+                                            branch()
+                                            .style("stoke-width",2)
+                                        )
+                                        .feature(
+                                            axis()
+                                                .location("bottom")
+                                                .y(height-rightFigMargins.top-rightFigMargins.bottom+5)
+                                                .x(0)
+                                                .title({text:"Date",
+                                                    yPadding:40})
+                                                    .tickFormat(d3.format(".0f"))
+                                        )
+
+    })
+
+
+
+</script>
+
+</body>
+</html>

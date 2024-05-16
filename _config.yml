@@ -42,6 +42,7 @@ google_analytics: G-M08Q5M2E4D
 theme: minimal-mistakes-jekyll
 plugins:
   - jekyll-feed
+future: true
 
 collections_dir: collections
 
@@ -49,6 +50,8 @@ collections:
   people:
     output: true
   news:
+    output: true
+  talks:
     output: true
     
 defaults:

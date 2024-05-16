@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0" y="0" width="768" height="1024" viewBox="0, 0, 768, 1024">
+  <g id="Layer_1">
+    <g>
+      <path d="M38.5,84.5 L38.5,84.5" fill="#4E79A7" fill-opacity="0.513"/>
+      <path d="M38.5,84.5 L38.5,84.5" fill-opacity="0" stroke="#000000" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+    <g>
+      <path d="M143.5,47.5 L143.5,205.5" fill-opacity="0" stroke="#000000" stroke-width="5"/>
+      <path d="M143.5,205.5 L640.5,205.5" fill-opacity="0" stroke="#000000" stroke-width="5"/>
+      <g>
+        <path d="M143.5,201.316 C163.275,202.701 179.489,196.331 191.5,180.316 C207.995,158.323 209.011,120.805 228.5,101.316 C283.633,46.183 302.052,194.071 354.5,199.316 z" fill="#4E79A7" fill-opacity="0.513"/>
+        <path d="M143.5,201.316 C163.275,202.701 179.489,196.331 191.5,180.316 C207.995,158.323 209.011,120.805 228.5,101.316 C283.633,46.183 302.052,194.071 354.5,199.316 z" fill-opacity="0" stroke="#000000" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+      </g>
+      <g>
+        <path d="M278,201.316 C297.775,202.701 313.989,196.331 326,180.316 C342.495,158.323 343.511,120.805 363,101.316 C418.133,46.183 436.552,194.071 489,199.316 z" fill="#4E79A7" fill-opacity="0.513"/>
+        <path d="M278,201.316 C297.775,202.701 313.989,196.331 326,180.316 C342.495,158.323 343.511,120.805 363,101.316 C418.133,46.183 436.552,194.071 489,199.316 z" fill-opacity="0" stroke="#000000" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+      </g>
+      <g>
+        <path d="M418,201.316 C437.775,202.701 453.989,196.331 466,180.316 C482.495,158.323 483.511,120.805 503,101.316 C558.133,46.183 576.552,194.071 629,199.316 z" fill="#4E79A7" fill-opacity="0.513"/>
+        <path d="M418,201.316 C437.775,202.701 453.989,196.331 466,180.316 C482.495,158.323 483.511,120.805 503,101.316 C558.133,46.183 576.552,194.071 629,199.316 z" fill-opacity="0" stroke="#000000" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+      </g>
+      <text transform="matrix(1, 0.003, -0.003, 1, 72.224, 111.5)">
+        <tspan x="-52.224" y="8" font-family="HelveticaNeue" font-size="24" fill="#040303">Infections</tspan>
+      </text>
+      <text transform="matrix(1, 0, 0, 1, 365.232, 226.5)">
+        <tspan x="-26.232" y="8" font-family="HelveticaNeue" font-size="24" fill="#040303">Time</tspan>
+      </text>
+    </g>
+    <g>
+      <path d="M143.5,308.5 L143.5,466.5" fill-opacity="0" stroke="#000000" stroke-width="5"/>
+      <path d="M143.5,466.5 L640.5,466.5" fill-opacity="0" stroke="#000000" stroke-width="5"/>
+      <g>
+        <path d="M143.5,462.316 C155.684,463.701 165.673,457.331 173.073,441.316 C183.236,419.323 183.862,381.805 195.87,362.316 C229.838,307.183 241.186,455.071 273.5,460.316 z" fill="#4E79A7" fill-opacity="0.513"/>
+        <path d="M143.5,462.316 C155.684,463.701 165.673,457.331 173.073,441.316 C183.236,419.323 183.862,381.805 195.87,362.316 C229.838,307.183 241.186,455.071 273.5,460.316 z" fill-opacity="0" stroke="#000000" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+      </g>
+      <g>
+        <path d="M485.167,456.793 C497.351,458.177 507.34,451.808 514.74,435.793 C524.903,413.8 525.529,376.282 537.536,356.793 C571.505,301.66 582.853,449.548 615.167,454.793 z" fill="#4E79A7" fill-opacity="0.513"/>
+        <path d="M485.167,456.793 C497.351,458.177 507.34,451.808 514.74,435.793 C524.903,413.8 525.529,376.282 537.536,356.793 C571.505,301.66 582.853,449.548 615.167,454.793 z" fill-opacity="0" stroke="#000000" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+      </g>
+      <g>
+        <path d="M315.167,456.793 C327.351,458.177 337.34,451.808 344.74,435.793 C354.903,413.8 355.529,376.282 367.536,356.793 C401.505,301.66 412.853,449.548 445.167,454.793 z" fill="#4E79A7" fill-opacity="0.513"/>
+        <path d="M315.167,456.793 C327.351,458.177 337.34,451.808 344.74,435.793 C354.903,413.8 355.529,376.282 367.536,356.793 C401.505,301.66 412.853,449.548 445.167,454.793 z" fill-opacity="0" stroke="#000000" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+      </g>
+      <text transform="matrix(1, 0.003, -0.003, 1, 72.224, 372.5)">
+        <tspan x="-52.224" y="8" font-family="HelveticaNeue" font-size="24" fill="#040303">Infections</tspan>
+      </text>
+      <text transform="matrix(1, 0, 0, 1, 365.232, 487.5)">
+        <tspan x="-26.232" y="8" font-family="HelveticaNeue" font-size="24" fill="#040303">Time</tspan>
+      </text>
+    </g>
+    <path d="M160.5,339.5 C160.5,334.167 160.5,328.833 160.5,323.5 M188.671,331.5 C179.281,331.5 169.89,331.5 160.5,331.5 M189.5,321.5 C189.5,329.543 188.24,355.061 189.5,325.5" fill-opacity="0" stroke="#000000" stroke-width="1" stroke-dasharray="3,2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M349.167,330.833 C349.167,325.5 349.167,320.167 349.167,314.833 M393.529,322.833 C378.741,322.833 363.954,322.833 349.167,322.833 M394.833,312.833 C394.833,320.876 392.849,346.394 394.833,316.833" fill-opacity="0" stroke="#000000" stroke-width="1" stroke-dasharray="3,2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M197.833,326.5 C197.833,321.167 197.833,315.833 197.833,310.5 M226.005,318.5 C216.614,318.5 207.224,318.5 197.833,318.5 M226.833,308.5 C226.833,316.543 225.574,342.061 226.833,312.5" fill-opacity="0" stroke="#000000" stroke-width="1" stroke-dasharray="3,2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M203.833,339.5 C203.833,334.167 203.833,328.833 203.833,323.5 M240.424,331.5 C228.227,331.5 216.03,331.5 203.833,331.5 M241.5,321.5 C241.5,329.543 239.864,355.061 241.5,325.5" fill-opacity="0" stroke="#000000" stroke-width="1" stroke-dasharray="3,2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M236.833,321.5 C236.833,316.167 236.833,310.833 236.833,305.5 M290.262,313.5 C272.452,313.5 254.643,313.5 236.833,313.5 M291.833,303.5 C291.833,311.543 289.444,337.061 291.833,307.5" fill-opacity="0" stroke="#000000" stroke-width="1" stroke-dasharray="3,2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M430.167,326.5 C430.167,321.167 430.167,315.833 430.167,310.5 M483.595,318.5 C465.786,318.5 447.976,318.5 430.167,318.5 M485.167,308.5 C485.167,316.543 482.777,342.061 485.167,312.5" fill-opacity="0" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M250.833,339.5 C250.833,334.167 250.833,328.833 250.833,323.5 M313.329,331.5 C292.497,331.5 271.665,331.5 250.833,331.5 M315.167,321.5 C315.167,329.543 312.372,355.061 315.167,325.5" fill-opacity="0" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M515.167,326.5 C515.167,321.167 515.167,315.833 515.167,310.5 M543.338,318.5 C533.948,318.5 524.557,318.5 515.167,318.5 M544.167,308.5 C544.167,316.543 542.907,342.061 544.167,312.5" fill-opacity="0" stroke="#000000" stroke-width="1" stroke-dasharray="3,2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M521.167,339.5 C521.167,334.167 521.167,328.833 521.167,323.5 M557.757,331.5 C545.56,331.5 533.364,331.5 521.167,331.5 M558.833,321.5 C558.833,329.543 557.197,355.061 558.833,325.5" fill-opacity="0" stroke="#000000" stroke-width="1" stroke-dasharray="3,2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M554.167,321.5 C554.167,316.167 554.167,310.833 554.167,305.5 M607.595,313.5 C589.786,313.5 571.976,313.5 554.167,313.5 M609.167,303.5 C609.167,311.543 606.777,337.061 609.167,307.5" fill-opacity="0" stroke="#000000" stroke-width="1" stroke-dasharray="3,2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M568.167,339.5 C568.167,334.167 568.167,328.833 568.167,323.5 M630.662,331.5 C609.83,331.5 588.998,331.5 568.167,331.5 M632.5,321.5 C632.5,329.543 629.705,355.061 632.5,325.5" fill-opacity="0" stroke="#000000" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M385.5,344.5 C385.5,339.167 385.5,333.833 385.5,328.5 M447.995,336.5 C427.164,336.5 406.332,336.5 385.5,336.5 M449.833,326.5 C449.833,334.543 447.039,360.061 449.833,330.5" fill-opacity="0" stroke="#000000" stroke-width="1" stroke-dasharray="3,2" stroke-linecap="round" stroke-linejoin="round"/>
+    <text transform="matrix(1, 0, 0, 1, 701.319, 317)">
+      <tspan x="-62.977" y="5" font-family="HelveticaNeue" font-size="17" fill="#040303">Latent infections</tspan>
+    </text>
+  </g>
+</svg>
