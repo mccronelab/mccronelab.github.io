@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- <title>Title</title> -->
+    <script src="/assets/talks/assets/js/d3.v7.min.js"></script>
+
+    <script src="/assets/talks/assets/js/topojson@3"></script>
+
+    <script src="/assets/talks/assets/js/d3-geo@3"></script>
+    <script src="/assets/talks/assets/js/d3-geo-projection@4"></script>
+
+    <script src="/assets/talks/assets/js/legend.js"></script>
+    <script src="/assets/talks/assets/js/constants.js"></script>
+    <script src="/assets/talks/assets/js/datFormat.js"></script>
+    <link rel="stylesheet" href="/assets/talks/assets/css/figure.css" />
+
+
+</head>
+<body>
+<div class="figure-div" id="fig" ></div>
+<script type="module">
+
+
+    import {Tree,FigTree,circle,axis,axisBars,branchLabel,branch,tipLabel,textAnnotation,rectangularLayout} from "/assets/talks/assets/js/figtree.esm.27e9.js";
+
+    const svgSelection = d3.select("#fig")
+        .append("svg")
+        .attr("class","tree")
+        .attr("id","rtt")
+        .attr("width",width)
+        .attr("height",height)
+
+
+    const margins = { top: 30, bottom: 60, left: 10, right: 150};
+
+    let tree,mcc;
+    let removeExpectations;
+    const firstTree = fetch("data/latency_unconstrained_17.ig.mcc.tree").then(d=>d.text()).then(
+        firstTreeText => {
+
+             tree = Tree.parseNexus(firstTreeText,{datePrefix: "|",dateFormat: "%Y-%m-%d"})[0];
+
+            // tree.reroot(tree.getExternalNode("KR063671|Yambuku-Mayinga|DRC|1976-10-01").parent,0.97) //R2 0.844
+            // console.log(tree)
+
+            tree.orderByNodeDensity(false)
+            // tree.externalNodes.filter(n => n.annotations.date > 2014.4).forEach(n=>tree.annotateNode(n,{"special":true}));
+            const cScale = d3.scaleSequential(d3.interpolateBlues).domain([-0.5,1])
+
+            const xAxis =  axis()
+                .location("bottom")
+                .y(height-margins.top-margins.bottom+5)
+                .x(0)
+                .tickFormat(d=>customFormat("%Y")(d+1)) // the breaks are at dec 31 so plus 1 and year puts at new year
+                .ticks(5)
+            .origin(2022.3014);
+            const bars = axisBars(xAxis)
+            bars._evenFill="#EDEDED";
+
+
+            mcc = new FigTree(document.getElementById("rtt"),margins,tree)
+                .layout(rectangularLayout)
+                .nodes(
+                    circle()
+                        .filter(d=>!d.children)
+                        .attr("r",d=>d.annotations.hovered?10:8)
+                        .style("fill",d=>cScale(0))
+                        .annotateOnHover("hovered"),
+                    tipLabel(d=>d.name.split("|").splice(-2).join(" "))
+
+                )
+                .nodeBackgrounds(
+                    circle()
+                        .filter(d=>!d.children)
+                        .attr("r",d=>d.annotations.hovered?12:10)
+                        .style("fill",cScale(2020))
+                )
+                .branches(branch()
+                            .style("stroke",d=>d.annotations.LS_median!==null && d.annotations.LS_median>0?cScale(d.annotations.LS_median):cScale(0))
+                            .style("stroke-width",5),
+                    branchLabel(d=>d.annotations.LS_median!==null && d.annotations.LS_median>0?
+                        `${d3.format("0.2f")(d.annotations.LS_median*d.length)} (${d3.format("0.0%")(d.annotations.LS_median)})`:
+                        ""))
+                .feature(xAxis)
+                .feature(bars)
+
+
+            // rootToTipPlot
+            //     .feature(textAnnotation()
+            //         .text(()=>`Rate:${ d3.format("0.2e")(rootToTipPlot.regression.slope)}`)
+            //         .y(40)
+            //         .x(30))
+            // rootToTipPlot
+            //     .feature(textAnnotation()
+            //         .text(()=>`TMRCA:${d3.format("0.0f")(rootToTipPlot.regression.xIntercept)}`)
+            //         .y(65)
+            //         .x(30))
+            // rootToTipPlot
+            //     .feature(textAnnotation()
+            //         .text(()=>`R^2:${d3.format("0.3f")(rootToTipPlot.regression.rSquare)}`)
+            //         .y(90)
+            //         .x(30));
+
+
+        });
+</script>
+</body>
+</html>

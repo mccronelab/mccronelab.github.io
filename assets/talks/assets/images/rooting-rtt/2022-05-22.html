@@ -48,18 +48,16 @@
         .attr("width", width)
         .attr("height", height);
 
-      const leftFigMargins = { top: 50, bottom: 50, left: 10, right: 700 };
-      const centerFigMargins = {
+      const leftFigMargins = {
         top: 50,
-        bottom: 50,
-        left: 500,
+        bottom: 100,
+        left: 10,
         right: 600,
       };
-      const rightFigMargins = { top: 50, bottom: 50, left: 650, right: 30 };
-
+      const rightFigMargins = { top: 50, bottom: 80, left: 500, right: 30 };
 
       const timeTreeString =
-        "((((virusA_1975[&location=4]:20.0,virusB_1965[&location=4]:10.0)[&location=]:10.0,virusC_1985[&location=1]:44.0)[&location=1]:15.0,(virusD_1970[&location=2]:35.0,virusE_1955[&location=2]:20.0)[&location=2]:5.0)[&location=2]:25.0,(virusF_2000[&location=3]:55.0,virusG_1960[&location=3]:15.0)[&location=3]:40.0)[&location=3];";
+        "((((virusA_1975[&location=4]:20.0,virusB_1965[&location=4]:10.0)[&location=]:10.0,virusC_1985[&location=1]:40.0)[&location=1]:15.0,(virusD_1970[&location=2]:35.0,virusE_1955[&location=2]:20.0)[&location=2]:5.0)[&location=2]:25.0,(virusF_2000[&location=3]:55.0,virusG_1960[&location=3]:15.0)[&location=3]:40.0)[&location=3];";
       const baseTimeTree = Tree.parseNewick(timeTreeString, {
         datePrefix: "_",
       });
@@ -70,57 +68,20 @@
         });
         baseTimeTree.treeUpdateCallback();
       };
-      baseTimeTree.reroot(baseTimeTree.getExternalNode("virusA_1975"), 0.5);
-
-      baseTimeTree.nodes.forEach((node) => {
-              node.length = node.length * 1.1e-3;
-            });
+      //   baseTimeTree.reroot(baseTimeTree.getExternalNode("virusA_1975"), 0.5);
 
       const colorScale = d3
         .scaleOrdinal(d3.schemeTableau10)
         .domain([1, 2, 3, 4, 5]);
-
-      const unRootedFig = new FigTree(
-        document.getElementById("figtree"),
-        leftFigMargins,
-        baseTimeTree
-      )
-        .layout(equalAngleLayout(baseTimeTree.internalNodes[5]))
-        .nodes(
-          circle()
-            .filter((n) => !n.children)
-            .attr("r", (n) => (n.annotations.hovered ? 10 : 5))
-            .attr("fill", (d) => colorScale(d.annotations.location))
-            .annotateOnHover("hovered"),
-          rectangle()
-            .filter((n) => n === baseTimeTree.root)
-            .attr("width", 5)
-            .attr("height", 5)
-            .attr("fill", colorScale(6))
-            .attr("stroke", "grey"),
-          tipLabel((n) => n.name.split("_")[1])
-        )
-        .nodeBackgrounds(
-          circle()
-            .filter((n) => !n.children)
-            .attr("r", 7)
-            .attr("fill", "black")
-            .rotateOnClick("false")
-        )
-        .branches(
-          branch()
-            .style("stroke-width", 2)
-            .reRootOnClick("euclidean")
-            .curve(d3.curveLinear)
-        );
-
+      let axisLabel = "Years from root";
+      let rootedFigTree;
       const makeRootedFigure = () => {
-        const rootedFigTree = new FigTree(
+        rootedFigTree = new FigTree(
           document.getElementById("figtree"),
-          centerFigMargins,
+          leftFigMargins,
           baseTimeTree
         )
-          .layout(reverseNunoLayout)
+          .layout(rectangularLayout)
           .nodes(
             circle()
               .filter((n) => !n.children)
@@ -143,16 +104,20 @@
               .attr("fill", "black")
               .rotateOnClick("false")
           )
-          .branches(
-            branch()
-              .style("stroke-width", 2)
-              .curve(d3.curveStepAfter)
-              .reRootOnClick()
+          .branches(branch().style("stroke-width", 2).curve(d3.curveStepBefore))
+          .feature(
+            axis()
+              .location("bottom")
+              .y(height - rightFigMargins.top - rightFigMargins.bottom)
+              .x(0)
+              .title({ text: axisLabel, yPadding: 35 })
+              .tickFormat(d3.format(".0f"))
           );
       };
 
+      let rootToTipPlot;
       const makeRTTplot = () => {
-        const rootToTipPlot = new FigTree(
+        rootToTipPlot = new FigTree(
           document.getElementById("figtree"),
           rightFigMargins,
           baseTimeTree
@@ -169,9 +134,9 @@
           .feature(
             axis()
               .location("bottom")
-              .y(height - rightFigMargins.top - rightFigMargins.bottom + 5)
+              .y(height - rightFigMargins.top - rightFigMargins.bottom +5)
               .x(0)
-              // .title({ text: "Date", yPadding: 40 })
+              .title({ text: "Sample Date", yPadding: 35 }) 
               .tickFormat(d3.format(".0f"))
           )
           .feature(
@@ -179,23 +144,35 @@
               .location("left")
               .y(0)
               .x(-5)
-              .title({ text: "Divergence", xPadding: -80, rotation: -90 })
-              .tickFormat(d3.format(".3f"))
+              .title({ text: axisLabel, xPadding: -80, rotation: -90 })
+              .tickFormat(d3.format(".0f"))
               .ticks(4)
           )
           .feature(trendLine());
       };
+
       makeRootedFigure();
-      makeRTTplot()
-      // window._transitions = [
-      //   {
-      //     transitionForward: () => {
-      //     },
-      //   },
-      //   {
-      //     transitionForward: () =>,
-      //   },
-      // ];
+      window._transitions = [
+        {
+          transitionForward: () => makeRTTplot(),
+         }
+        //, {
+        //   transitionForward: () => {
+        //     axisLabel = "Divergence from root";
+
+        //     baseTimeTree.nodes.forEach((node) => {
+        //       node.length = node.length * 1.1e-3;
+        //     });
+        //     rootToTipPlot.update();
+        //     rootedFigTree.update();
+        //     d3.select("#figtree")
+        //       .selectAll(".axis-label")
+        //       .select("text")
+        //       .text(axisLabel);
+        //   },
+        // },
+      
+      ];
     </script>
   </body>
 </html>

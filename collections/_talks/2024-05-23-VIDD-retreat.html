@@ -1,0 +1,286 @@
+---
+layout: talk
+title: Phylogenetic insights into Ebola dynamics in the unobserved reservoir
+author: JT McCrone
+event: VIDD retreat
+location:  St. Edward State Park
+widescreen: true
+fig-width: 900px
+fig-height: 506px
+---
+<!-- 10 min 
+VIDD audience 
+just enough to pique their interest -->
+<section>
+  <br />
+  <h2 class="title">{{ page.title }}</h2>
+  <br />
+  <p class="title-personal">
+    JT McCrone
+    <br/>
+    Fred Hutch Cancer Center
+    <br />
+    {{ page.date | date: "%b %d, %Y" }}
+    <br />
+    {{ page.event }}
+    <br />
+    {{ page.location }}
+  </p>
+</section>
+
+<section>
+  <h3>Ebola virus</h3>
+  <div>
+    <div class="col-40" style="font-size: 0.6em; margin-top: 2em">
+      <ul>
+        <li>(-) sense RNA virus ~18 Kb genome</li>
+        <li>
+          17 independent spillover events from a poorly characterized reservoir
+        </li>
+        <li>
+          Wide-spread mortality observed among great apes in Gabon and the Republic of Congo during the 1990s
+        </li>
+        <li>
+          Anti-Ebola antibodies and viral RNA have been detected in multiple bat
+          species
+        </li>
+      </ul>
+    </div>
+    <div class="col-60">
+      <div
+      class="fig-container"
+      data-file="/assets/talks/assets/images/ebolaOutbreakMap/no_transition.html"
+      data-preload
+      data-style="height: {{page.fig-height}}; width: {{page.fig-width}}; margins:auto"
+      data-scroll="no"
+    ></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h3>Ebola evolution in humans</h3>
+  <div>
+    <div class="col-35">
+      <img  src="/assets/talks/assets/images/41586_2016_Article_BFnature19790_Fig3_HTML.png">
+      <div class="citation">
+        <p>Holmes, et al., 2016</p>
+      </div>
+    </div>
+    <div class="col-65 fragment">
+      <img style="margin-top: 1em" src="/assets/talks/assets/images/41591_2021_1302_Fig4_HTML.png">
+      <div class="citation">
+        <p>Kinganda-Lusamaki, et al., 2021</p>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<section>
+  <h3>Extreme rate heterogeneity in humans</h3>
+  <div
+    class="fig-container"
+    data-file="/assets/talks/assets/images/ebolaWArtt-latency/index.html"
+    data-preload
+    data-style="height: {{page.fig-height}}; width: {{page.fig-width}}; margins:auto"
+    data-scroll="no"
+  ></div>
+  <div class="citation">
+    <p>Keita, A. K, et al., 2021</p>
+  </div>
+</section>
+
+<section>
+  <h3>Ebola evolution 1976-2014</h3>
+  <div
+    class="fig-container"
+    data-file="/assets/talks/assets/images/ebolaRTTExploration/2022-05-22.html"
+    data-preload
+    data-style="height: {{page.fig-height}}; width: {{page.fig-width}}; margins:auto"
+    data-scroll="no"
+  ></div>
+</section>
+
+
+<section>
+  <h3>Geographic spread 1976-2014</h3>
+  <div
+    class="fig-container"
+    data-file="/assets/talks/assets/images/ebolaEarlySpread/index.html"
+    data-preload
+    data-style="height: {{page.fig-height}}; width: {{page.fig-width}}; margins:auto"
+    data-scroll="no"
+  ></div>
+</section>
+
+
+
+<section>
+  <h3>Recent outbreak are less diverged then expected </h3>
+  <div
+    class="fig-container"
+    data-file="/assets/talks/assets/images/ebolaRTTExploration/index.html"
+    data-preload
+    data-style="height: {{page.fig-height}}; width: {{page.fig-width}}; margins:auto"
+    data-scroll="no"
+  ></div>
+</section>
+
+
+
+<section>
+  <h3>A latent branch-rate model</h3>
+
+  <div
+    class="fig-container"
+    data-file="/assets/talks/assets/images/latencyModel.html"
+    data-style="height: 300px; width: 900px; margins:auto"
+    data-scroll="no"
+  ></div>
+  <div style="margin-top: 10px">
+    <div class="col-50">
+      <p style="margin-top: 50px">
+        evolutionary rate = <span style="color: #a3b9cc">0</span>|
+        <span style="color: #08306b">&mu;</span>
+      </p>
+    </div>
+    <div class="col-50">
+      <p>
+        <span style="color: #a3b9cc">latent</span> $
+        \overset{\mbox{$\lambda$}}{\Leftrightarrow}$
+        <span style="color: #08306b">replicating</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h3>Latent branches date back to 1980s</h3>
+  <div
+    class="fig-container"
+    data-file="/assets/talks/assets/images/ebola17Latency/mcc.html"
+    data-preload
+    data-style="height: {{page.fig-height}}; width: {{page.fig-width}}; margins:auto"
+    data-scroll="no"
+  ></div>
+</section>
+
+
+<section>
+  <h3>Geographic implications of 'slow-down' events</h3>
+  <div
+    class="fig-container"
+    data-file="/assets/talks/assets/images/ebola17Latency/mapAndTree.html"
+    data-preload
+    data-style="height: {{page.fig-height}}; width: {{page.fig-width}}; margins:auto"
+    data-scroll="no"
+  ></div>
+</section>
+
+
+<section>
+  <h3>Conclusion: Ebola dynamics in the reservoir</h3>
+  <div>
+    <div class="col-50" style="font-size: 0.8em; margin-top: 3em">
+      <ul>
+        <li>Active transmission from 1970-2014 seeding latent infections</li>
+        <li>
+          Recent outbreaks (2014-present) stem from reactivated infections
+        </li>
+        <li>Long-lived reservoir host</li>
+        <li>Dynamic spill-over threat</li>
+        <li>Unknown mechanism for latency</li>
+      </ul>
+    </div>
+    <div class="col-50">
+      <img src="/assets/talks/assets/images/oscillating.svg" />
+    </div>
+  </div>
+  <div
+    class="fragment"
+    style="position: absolute; margin-top: 3em; margin-left: 25%"
+  >
+    <img
+      src="/assets/talks/assets/images/vert-transmission.png"
+      style="border: 5px solid #a3b9cc"
+    />
+  </div>
+</section>
+
+
+<section>
+  <h2>Thank you</h2>
+  <div style="display: flex; flex-direction: column">
+    <div class="row">
+      <div class="col-30 thanks">
+        <p>University of Edinburgh</p>
+        <ul>
+          <li>Andrew Rambaut</li>
+          <li style="font-weight: bold">Ifeayni Omah</li>
+          <li >Verity Hill</li>
+          <li>Ben Jackson</li>
+          <li>Áine O'Toole</li>
+          <li>Rachel Colquhoun</li>
+          <li>Emily Scher</li>
+          <li>Shawn Yu</li>
+          <li>Guy Baele -KU Leuven</li>
+
+        </ul>
+      </div>
+
+      <!-- <div class="col-30 thanks">
+        <p>Oxford</p>
+        <ul>
+          <li>Louis du Plessis</li>
+          <li>Alex Zarebski</li>
+          <li>Oliver Pybus</li>
+          <li>Moritz Kramer</li>
+          <li>Sumali Bajaj</li>
+          <li>Rosario Dawson</li>
+          <li>Chris Ruis</li>
+        </ul>
+      </div> -->
+
+      <div class="col-30 thanks">
+        <p>McCrone lab</p>
+        <ul>
+          <li>Conner Copeland</li>
+          <li>Cristian Ovadiuc</li>
+        </ul>
+        <br />
+        <p>Bedford lab</p>
+
+      </div>
+      <div class="col-30 thanks">
+        <p>Matsen Group</p>
+        <ul>
+          <li>Eric Matsen</li>
+          <li>Joseph Brew</li>
+        </ul>
+      </div>
+
+    </div>
+
+
+    <div class="thanks" style="margin-top: -10px">
+      <div class="logo-footer">
+        <div class="col-20">
+          <img src="/assets/talks/assets/images/UE.jpg" "/>
+        </div>
+        <div class="col-20">
+          <img src="/assets/talks/assets/images/artic.png" />
+        </div>
+        <div class="col-20">
+          <img src="/assets/talks/assets/images/wellcome-logo-red-small.png" />
+        </div>
+        <!-- <div class="col-20">
+          <img src="/assets/talks/assets/images/cog.png" />
+        </div> -->
+        <div class="col-20">
+          <img src="/assets/talks/assets/images/fh.png" />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
