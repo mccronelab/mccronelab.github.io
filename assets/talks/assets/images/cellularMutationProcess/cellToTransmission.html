@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- <title>Title</title> -->
+    <script src="/assets/talks/assets/js/d3.v7.min.js"></script>
+    <script src="/assets/talks/assets/js/constants.js"></script>
+    <link rel="stylesheet" href="/assets/talks/assets/css/figure.css" />
+  </head>
+  <body>
+    <div class="figure-div" id="fig"></div>
+    <!--<style>-->
+    <!--    .external-node .node-shape{-->
+    <!--        fill:none-->
+    <!--    }-->
+    <!--    .internal-node .node-shape{-->
+    <!--        fill:none-->
+    <!--    }-->
+    <!--</style>-->
+    <script type="module">
+      import {
+        Tree,
+        FigTree,
+        roughBranch,
+        roughCircle,
+        Type,
+        axisBars,
+        circle,
+        branch,
+        tipLabel,
+        rectangularLayout,
+        rectangle,
+        image,
+      } from "/assets/talks/assets/js/figtree.esm.2baf5.js";
+
+      const svgSelection = d3
+        .select("#fig")
+        .append("svg")
+        .attr("class", "tree")
+        .attr("id", "figtree")
+      .attr("width", width)
+      .attr("height", height);
+
+      const margins = { top: 50, bottom: 50, left: 50, right: 50 };
+
+      const tree_string =
+        "(((A6:1.0,((((D6:1.0,(D9:1.0,D4:1.0):1.0):1.0,(D2:1.0,D1:1.0):1.0):1.0,(D5:1.0,(D8:1.0,((D7:1.0,D3:1.0):1.0,D0:1.0):1.0):1.0):1.0)#t_0:1.0,A4:1.0):1.0):1.0,(A2:1.0,A1:1.0):1.0):1.0,(A5:1.0,(A8:1.0,(((((B6:1.0,((((C6:1.0,(C9:1.0,C4:1.0):1.0):1.0,(C2:1.0,C1:1.0):1.0):1.0,(C5:1.0,(C8:1.0,((C7:1.0,C3:1.0):1.0,C0:1.0):1.0):1.0):1.0)#t_2:1.0,B4:1.0):1.0):1.0,(B2:1.0,B1:1.0):1.0):1.0,(B5:1.0,(B8:1.0,((B7:1.0,B3:1.0):1.0,B0:1.0):1.0):1.0):1.0)#t_1:1.0,A3:1.0):1.0,A0:1.0):1.0):1.0):1.0);";
+      
+      
+      
+        const tree = Tree.parseNewick(tree_string);
+
+      tree.nodes.forEach((n) => (n.effectiveLevel = n.level));
+
+      const layout =
+        (level = 2) =>
+        (figtree) => {
+          figtree.tree().nodes.forEach((n) => {
+            if (n.effectiveLevel > level) {
+              figtree.ignoreAndHide(n, false);
+            } else if (n.effectiveLevel === level) {
+              figtree.hide(n, false);
+            } else {
+              if (!n.annotations.hidden) {
+                figtree.reveal(n, false);
+              }
+            }
+          });
+
+          let currentY = 0;
+
+          const id = figtree.id;
+          const tree = figtree.tree();
+          const traverse = function (node, siblingPositions = []) {
+            const myChildrenPositions = [];
+            if (!node[id]) {
+              console.log(node);
+            }
+            if (!node[id].ignore) {
+              let yPos;
+              if (
+                node.children &&
+                node.children.reduce(
+                  (acc, curr) => acc && !curr[id].ignore,
+                  true
+                )
+              ) {
+                if (node[id].collapsed) {
+                  yPos = currentY += 1;
+                } else {
+                  for (const child of node.children) {
+                    traverse(child, myChildrenPositions);
+                  }
+                  yPos = d3.mean(myChildrenPositions);
+                }
+              } else {
+                yPos = currentY += 1;
+                siblingPositions.push(currentY);
+              }
+
+              siblingPositions.push(yPos);
+
+              const leftLabel = !!node.children;
+              const labelBelow =
+                !!node.children &&
+                (!node.parent || node.parent.children[0] !== node);
+
+              node[id].x = node.divergence;
+              node[id].y = yPos;
+              node[id].classes = getClassesFromNode(node);
+              // node[id].classes = [];
+
+              node[id].textLabel = {
+                labelBelow,
+                x: leftLabel ? "-6" : "12",
+                y: leftLabel ? (labelBelow ? "-8" : "8") : "0",
+                alignmentBaseline: leftLabel
+                  ? labelBelow
+                    ? "bottom"
+                    : "hanging"
+                  : "middle",
+                textAnchor: leftLabel ? "end" : "start",
+              };
+            }
+          };
+
+          traverse(tree.root);
+        };
+
+      const colorScale = d3
+        .scaleOrdinal(d3.schemeTableau10)
+        .domain(["1", "2", "3", "4"]);
+      tree.nodes.forEach((n) => {
+        tree.annotateNode(n, { location: "1" });
+      });
+      let i = 2;
+      var seed = 1;
+      function random() {
+        //https://stackoverflow.com/questions/521295/seeding-the-random-number-generator-in-javascript
+        var x = Math.sin(seed++) * 10000;
+        return x - Math.floor(x);
+      }
+      [...tree.preorder()].forEach((n) => {
+        if (n.children) {
+          if (random() > 0.85) {
+            const mutNode = tree.splitBranch(n);
+            mutNode.effectiveLevel = mutNode.children[0].effectiveLevel;
+            tree.annotateNode(mutNode, { location: `${i}` });
+            [...tree.postorder(mutNode)].forEach((d) => {
+              tree.annotateNode(d, { location: `${i}` });
+            });
+            i += 1;
+          }
+        }
+      });
+      const rootedFigTree = new FigTree(
+        document.getElementById("figtree"),
+        margins,
+        tree
+      )
+        .layout(layout(1))
+        // .layout(rectangularLayout)
+        .nodes(
+          image()
+            .filter(
+              (n) =>
+                !n.annotations.hidden &&
+                !n.annotations.insertedNode &&
+                !n.annotations.grey &&
+                (!n.name || n.name !== "case249")
+            )
+            .path(
+              (n) =>
+                `cells/${colorScale(n.annotations.location).replace(
+                  "#",
+                  ""
+                )}.svg`
+            )
+            .attr("height", "75px")
+            .attr("width", "75px")
+            .attr("x", "-40px")
+            .attr("y", "-40px"),
+          image()
+            .filter(
+              (n) =>
+                !n.annotations.hidden &&
+                !n.annotations.insertedNode &&
+                n.annotations.grey
+            )
+            .path((n) => `cells/grey.svg`)
+            .attr("height", "75px")
+            .attr("width", "75px")
+            .attr("x", "-40px")
+            .attr("y", "-40px"),
+          image()
+            .filter((n) => n.name && n.name == "case249")
+            .path(
+              (n) =>
+                `viruses/${colorScale(n.annotations.location).replace(
+                  "#",
+                  ""
+                )}.svg`
+            )
+            .attr("height", "75px")
+            .attr("width", "75px")
+            .attr("x", "-40px")
+            .attr("y", "-40px"),
+
+          rectangle()
+            .filter((n) => !n.annotations.hidden && n.annotations.insertedNode)
+            .attr("height", 30)
+            .attr("width", 10)
+            .attr("fill", (n) =>
+              n.annotations.grey
+                ? "lightgrey"
+                : colorScale(n.annotations.location)
+            )
+            .attr("stroke", "black")
+            .attr("stroke-width", 4)
+        )
+        .nodeBackgrounds(
+          circle()
+            .filter(
+              (n) =>
+                !n.annotations.hidden &&
+                !n.annotations.insertedNode
+            )
+            .attr("r", (n) => (40))
+            .attr("fill", "white")
+        )
+
+        .branches(
+          roughBranch()
+            .filter((n) => !n.annotations.hidden)
+            .curve(d3.curveNatural)
+            .attr("stoke-width", 2)
+        );
+      // .feature(
+      //     axis()
+      //         .origin(2020)
+      //         .y(height-margins.top-margins.bottom+30)
+      //         .tickFormat(customFormat("%b-%d"))
+      // );
+      rootedFigTree.update();
+
+      window._transitions = [
+        {
+          transitionForward: () => {
+            rootedFigTree.layout(layout(2));
+            rootedFigTree.update();
+          },
+          transitionBackward: () => {
+            rootedFigTree.layout(layout(1));
+            rootedFigTree.update();
+          },
+        },
+        {
+          transitionForward: () => {
+            rootedFigTree.layout(layout(3));
+            rootedFigTree.update();
+          },
+          transitionBackward: () => {
+            rootedFigTree.layout(layout(2));
+            rootedFigTree.update();
+          },
+        },
+        {
+          transitionForward: () => {
+            rootedFigTree.layout(layout(4));
+            rootedFigTree.update();
+          },
+          transitionBackward: () => {
+            rootedFigTree.layout(layout(3));
+            rootedFigTree.update();
+          },
+        },
+        {
+          transitionForward: () => {
+            rootedFigTree.layout(layout(5));
+            rootedFigTree.update();
+          },
+          transitionBackward: () => {
+            rootedFigTree.layout(layout(4));
+            rootedFigTree.update();
+          },
+        },
+        {
+          transitionForward: () => {
+            rootedFigTree.layout(layout(6));
+            rootedFigTree.update();
+            tree.nodes.forEach((n) => tree.annotateNode(n, { grey: true }));
+            [...Tree.pathToRoot(tree.getExternalNode("case249"))].forEach((n) =>
+              tree.annotateNode(n, { grey: false })
+            );
+            rootedFigTree.update();
+          },
+          transitionBackward: () => {
+            rootedFigTree.layout(layout(5));
+            rootedFigTree.update();
+          },
+        },
+      ];
+      function getClassesFromNode(node) {
+        let classes = [!node.children ? "external-node" : "internal-node"];
+        const tree = node.tree;
+        if (node.annotations) {
+          classes = [
+            ...classes,
+            ...Object.entries(node.annotations)
+              .filter(([key]) => {
+                return (
+                  tree.annotations[key] &&
+                  (tree.annotations[key].type === Type.DISCRETE ||
+                    tree.annotations[key].type === Type.BOOLEAN ||
+                    tree.annotations[key].type === Type.INTEGER)
+                );
+              })
+              .map(([key, value]) => {
+                if (
+                  tree.annotations[key].type === Type.DISCRETE ||
+                  tree.annotations[key].type === Type.INTEGER
+                ) {
+                  return `${key}-${value}`;
+                } else if (
+                  tree.annotations[key].type === Type.BOOLEAN &&
+                  value
+                ) {
+                  return `${key}`;
+                }
+              }),
+          ];
+        }
+        return classes;
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- <title>Title</title> -->
+    <script src="/assets/talks/assets/js/d3.v7.min.js"></script>
+    <script src="/assets/talks/assets/js/topojson@3"></script>
+    <script src="/assets/talks/assets/js/d3-geo@3"></script>
+    <script src="/assets/talks/assets/js/d3-geo-projection@4"></script>
+    <script src="/assets/talks/assets/js/legend.js"></script>
+    <script src="/assets/talks/assets/js/constants.js"></script>
+     <link rel="stylesheet" href="/assets/talks/assets/css/figure.css" />
+
+
+
+</head>
+<body>
+    <div class = "figure-div" id="fig" ></div>
+<script type="module">
+
+    const width = 750;
+    const svgSelection = d3.select("#fig")
+        .append("svg")
+        .attr("class","map")
+        .attr("id","map")
+        // .attr("preserveAspectRatio", "xMinYMin meet")
+        // .attr("viewBox", `0 0 ${width} ${height}`);
+        .attr("width",width)
+        .attr("height",height)
+        // .attr("display","block")
+        // .attr("margin","auto")
+
+    const world = fetch("data/world-110m.json").then(res=>res.json())
+    // const treeFetch = fetch("../data/15-virus.iqtree.tree")
+    //     .then(response=>response.text())
+    //     .then(text=>Tree.parseNewick(text,{datePrefix: "|",dateFormat: "%Y-%m-%d"}));
+    const tipLocations = d3.tsv("data/locations.tsv",d3.autoType);
+
+        // const x = Promise.all([world,tipLocations])
+
+    let transition;
+    const x = Promise.all([world,tipLocations])
+        .then(makeFigure);
+
+
+        function makeFigure(data){
+            const world =  data[0];
+            //    tree = data[1];
+            //    const tipLocations= data[2];
+// projection based on https://observablehq.com/d/ac79c14a0d279be5
+            const projection = d3.geoBonne()
+                .parallel(52)
+                .rotate([-5, 0])
+                .center([0, 0])
+                .translate([width / 2, height / 2])
+                .scale(width / 1.2);
+            const land =  topojson.feature(world, world.objects.land);
+
+            projection.preclip(d3.geoClipAntimeridian);
+            // projection.preclip(clipPolygon);
+
+            svgSelection
+            .append("rect")
+            .attr("width",width)
+            .attr("height",height)
+            .attr("fill","#def3f9")
+            svgSelection
+                .append("path")
+                .attr("d",d3.geoPath(projection)(land))
+                .attr("fill","#B0B0B0")
+                .attr("stroke","#F8F8F8	");
+
+                svgSelection
+                .append("path")
+                .attr("d",d3.geoPath(projection)(topojson.mesh(world, world.objects.countries, function(a, b) { return a !== b; })))
+                .attr("class", "boundary")
+                .attr("stroke","#F8F8F8	")
+                .attr("fill","none")
+                
+                // d3 wants long lat
+                data[1].forEach( d=>d.location=projection([d.long,d.lat]));
+                const points = data[1];
+                const rScale = d3.scaleSqrt().domain([1,30000]).range([5,100])
+                const cScale = d3.scaleSequential(d3.interpolateBlues).domain(d3.extent(points,d=>d.year))
+                svgSelection
+                    .selectAll(".outbreaks")
+                    .data(points,d=>d.cases)
+                    .join("circle")
+                        .attr("class", "outbreaks")
+                        .attr("cx",d=>d.location[0])
+                        .attr("cy",d=>d.location[1])
+                        .attr("r",d=>rScale(d.cases))
+                        .attr("fill",d=>cScale(d.year))
+                        .attr("stroke", d=>cScale(d.year+1))
+                        .attr("fill-opacity",0.8)
+                        .attr("stroke-width", 2)
+                        svgSelection
+                // svgSelection
+                //     .selectAll(".outbreaks-labels")
+                //     .data(points,d=>d.cases)
+                //     .join("text")
+                //         .attr("class", "outbreaks-labels")
+                //         .attr("x",d=>d.location[0])
+                //         .attr("y",d=>d.location[1])
+                //         .text(d=>d.year)
+                //         .attr("text-anchor","middle")
+                //         .style("font-size",8)
+
+
+// legends
+                const examplePoints = [30,3000,30000];
+                const rLegend = svgSelection
+                    .append("g")
+                    .attr("transform", "translate(300,350)")
+                    rLegend
+                    .selectAll(".legend-circle")
+                    .data(examplePoints)
+                        .join("circle")
+                        .attr("cy",d=>100-rScale(d))
+                        .attr("cx",0)
+                        .attr("r", d=>rScale(d))
+                        .attr("stroke","#515151")
+                        .attr("class","legend-circle")
+                        .attr("fill","none")
+                    rLegend
+                        .selectAll("text")
+                        .data(examplePoints)
+                        .join("text")
+                        .attr("y",d=>100 - 2 * rScale(d))
+                        .text(d=>d3.format(",")(d))
+                        .style("text-anchor","middle")
+
+                const cLegend = legend({
+                        color: cScale,
+                        title: "",
+                        tickFormat:d3.format(".0f"),
+                        width:rScale(30000)*2
+                        });
+
+                svgSelection
+                    .append("g")
+                    .attr("transform", `translate(${300-rScale(30000)},450)`)
+                    .append(function(){return cLegend.cloneNode( true );} )
+                        // console.log(cLegend)
+
+            //     <text y="${200 - 2 * scale(v) + 3}"
+            //   style="dominant-baseline: hanging; text-anchor: middle;"
+            // >${v}</text>
+
+            // const treeSVG = document.getElementById('map');
+
+            // const layout = new GeoLayout(tree,projection);
+            // const externalNodeBauble = new CircleBauble({radius: 4,vertexFilter:v=>!v.node.children&&v.node.annotations.shown});
+            // const externalBackNodeBauble = new CircleBauble({radius: 5,vertexFilter:v=>!v.node.children&&v.node.annotations.shown});
+
+            // const branches = new GreatCircleBranchBauble();
+
+            // figTree = new FigTree(treeSVG, layout,
+            //     {top: 0, bottom: 0, left: 0, right: 0,scaleWithSVG:true}, // margins come from projection
+            //     {
+            //         vertices: {baubles: [externalNodeBauble],backgroundBaubles:[externalBackNodeBauble]},
+            //         edges: {baubles: [branches]}
+            //     });
+            // figTree
+            //     .hilightInternalNodes()
+            //     .hilightExternalNodes()
+            //     .hilightBranches()
+            //     .draw()
+            //     .addAnnotation(drawWorld(figTree,land,world))
+
+
+            transition=(predicate) =>{
+                svgSelection
+                    .selectAll(".outbreaks")
+                    .data(points.filter(d=>predicate(d)),d=>d.cases)
+                    .join(
+                    enter=>enter.append("circle")
+                        .attr("class", "outbreaks")
+                        .attr("cx",d=>d.location[0])
+                        .attr("cy",d=>d.location[1])
+                        .transition(d3.ease)
+                        .attr("r",d=>rScale(d.cases))
+                        .attr("fill",d=>cScale(d.year))
+                        .attr("stroke", d=>cScale(d.year+1))
+                        .attr("fill-opacity",0.8)
+                        .attr("stroke-width", 2),
+                        update=>update
+                            .attr("class", "outbreaks")
+                            .attr("cx",d=>d.location[0])
+                            .attr("cy",d=>d.location[1])
+                            .transition(d3.ease)
+                            .attr("r",d=>rScale(d.cases))
+                            .attr("fill",d=>cScale(d.year))
+                            .attr("stroke", d=>cScale(d.year+1))
+                            .attr("fill-opacity",0.8)
+                            .attr("stroke-width", 2),
+                        exit=>exit
+                            .transition(d3.ease)
+                            .attr("r",0)
+                            .attr("fill-opacity",0.0)
+                                .remove(),
+                    )
+
+            }
+            console.log("here")
+
+        }
+
+   
+</script>
+</body>
+</html>

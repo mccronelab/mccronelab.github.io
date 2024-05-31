@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- <title>Title</title> -->
+    <script src="/assets/talks/assets/js/d3.v7.min.js"></script>
+
+    <script src="/assets/talks/assets/js/topojson@3"></script>
+
+    <script src="/assets/talks/assets/js/d3-geo@3"></script>
+    <script src="/assets/talks/assets/js/d3-geo-projection@4"></script>
+
+    <script src="/assets/talks/assets/js/legend.js"></script>
+    <script src="/assets/talks/assets/js/constants.js"></script>
+    <link rel="stylesheet" href="/assets/talks/assets/css/figure.css" />
+</head>
+<body>
+<div class="figure-div" id="fig" ></div>
+<script type="module">
+
+    import {Tree,FigTree,circle,tipLabel,branch,rootToTipLayout,axis,geographicLayout,trendLine,textAnnotation,rectangularLayout} from "/assets/talks/assets/js/figtree.esm.27e9.js";
+
+
+    const svgSelection = d3.select("#fig")
+        .append("svg")
+        .attr("class","tree")
+        .attr("id","spread")
+        // .attr("preserveAspectRatio", "xMinYMin meet")
+        // .attr("viewBox", `0 0 ${width} ${height}`);
+        .attr("width",width)
+        .attr("height",height)
+    // .attr("display","block")
+    // .attr("margin","auto")
+    const world = fetch("data/world-110m.json").then(res=>res.json())
+    // const treeFetch = fetch("data/15-virus.iqtree.tree")
+    //     .then(response=>response.text())
+    //     .then(text=>Tree.parseNewick(text,{datePrefix: "|",dateFormat: "%Y-%m-%d"}));
+    const polygons =  [fetch("data/geojson/1.geojson").then(res=>res.json()),
+        fetch("data/geojson/2.geojson").then(res=>res.json()),
+        fetch("data/geojson/3.geojson").then(res=>res.json()),
+        fetch("data/geojson/4.geojson").then(res=>res.json()),
+        fetch("data/geojson/5.geojson").then(res=>res.json()),
+        fetch("data/geojson/6.geojson").then(res=>res.json()),
+        fetch("data/geojson/7.geojson").then(res=>res.json()),
+        fetch("data/geojson/8.geojson").then(res=>res.json()),
+        fetch("data/geojson/9.geojson").then(res=>res.json()),
+        fetch("data/geojson/10.geojson").then(res=>res.json()),
+        fetch("data/geojson/11.geojson").then(res=>res.json()),
+        fetch("data/geojson/12.geojson").then(res=>res.json()),
+        fetch("data/geojson/13.geojson").then(res=>res.json()),
+        fetch("data/geojson/14.geojson").then(res=>res.json()),
+        fetch("data/geojson/15.geojson").then(res=>res.json()),
+        fetch("data/geojson/16.geojson").then(res=>res.json()),
+        fetch("data/geojson/17.geojson").then(res=>res.json()),
+        fetch("data/geojson/18.geojson").then(res=>res.json()),
+        fetch("data/geojson/19.geojson").then(res=>res.json()),
+        fetch("data/geojson/20.geojson").then(res=>res.json()),
+        fetch("data/geojson/21.geojson").then(res=>res.json()),
+        fetch("data/geojson/22.geojson").then(res=>res.json()),
+        fetch("data/geojson/23.geojson").then(res=>res.json()),
+        fetch("data/geojson/24.geojson").then(res=>res.json()),
+        fetch("data/geojson/25.geojson").then(res=>res.json()),
+        fetch("data/geojson/26.geojson").then(res=>res.json()),
+        fetch("data/geojson/27.geojson").then(res=>res.json()),
+        fetch("data/geojson/28.geojson").then(res=>res.json()),
+        fetch("data/geojson/29.geojson").then(res=>res.json()),
+        fetch("data/geojson/30.geojson").then(res=>res.json()),
+        fetch("data/geojson/31.geojson").then(res=>res.json()),
+        fetch("data/geojson/32.geojson").then(res=>res.json()),
+        fetch("data/geojson/33.geojson").then(res=>res.json()),
+        fetch("data/geojson/34.geojson").then(res=>res.json()),
+        fetch("data/geojson/35.geojson").then(res=>res.json()),
+        fetch("data/geojson/36.geojson").then(res=>res.json()),
+        fetch("data/geojson/37.geojson").then(res=>res.json()),
+        fetch("data/geojson/38.geojson").then(res=>res.json()),
+        fetch("data/geojson/39.geojson").then(res=>res.json()),
+        fetch("data/geojson/40.geojson").then(res=>res.json()),
+        fetch("data/geojson/41.geojson").then(res=>res.json()),
+        fetch("data/geojson/42.geojson").then(res=>res.json()),
+        fetch("data/geojson/43.geojson").then(res=>res.json()),
+        fetch("data/geojson/44.geojson").then(res=>res.json()),
+        fetch("data/geojson/45.geojson").then(res=>res.json()),
+        fetch("data/geojson/46.geojson").then(res=>res.json())]
+
+    const treeText = fetch("data/latency_constrained_17.ig.mcc.tree").then(d=>d.text());
+    const x = Promise.all([world,treeText,...polygons])
+        .then(makeFigure);
+
+    const fullMargins = {top:10,bottom:60,left:100,right:50}
+    const initialMargins = { top: 200, bottom: 60, left: 50, right: 450};
+
+    const updatedMargins = { top: 160, bottom: 260, left: 100, right: 350};
+
+    let transitionForward;
+    let transitionBackward;
+    function makeFigure(data){
+        const world =  data[0];
+        const projection = d3.geoBonne()
+            .parallel(52)
+            .rotate([-1, 0])
+            .center([0, 0])
+            .translate([width / 2, height / 2])
+            .scale(width / 1);
+
+
+        const land =  topojson.feature(world, world.objects.land);
+        const tree =  Tree.parseNexus(data[1],{datePrefix: "|",dateFormat: "%Y-%m-%d"})[0];
+
+        tree.nodes.forEach(n=> {
+            tree.annotateNode(n, {"latitude": n.annotations.location1, "longitude": n.annotations.location2})
+            }
+        )
+
+        projection.preclip(d3.geoClipAntimeridian);
+        // projection.preclip(clipPolygon);
+        const cScale = d3.scaleSequential(d3.interpolateBlues).domain([1975,2022])
+        const lsScale = d3.scaleSequential(d3.interpolateBlues).domain([-0.5,1])
+
+        svgSelection
+            .append("rect")
+            .attr("width",width)
+            .attr("height",height)
+            .attr("fill","#def3f9")
+        svgSelection
+            .append("path")
+            .attr("d",d3.geoPath(projection)(land))
+            .attr("fill","#B0B0B0")
+            .attr("stroke","#F8F8F8")
+            .attr("class","hidden hideable")
+
+        svgSelection
+            .append("path")
+            .attr("d",d3.geoPath(projection)(topojson.mesh(world, world.objects.countries, function(a, b) { return a !== b; })))
+            .attr("class", "boundary")
+            .attr("stroke","#F8F8F8	")
+            .attr("fill","none")
+            .attr("class","hidden hideable")
+
+        for(let i =3; i<data.length; i++){
+            svgSelection
+                .append("path")
+                .attr("d",d3.geoPath(projection)(data[i]))
+                .attr("fill",cScale(data[i].features[0].properties.year))
+                .attr("stroke", "none")
+                .attr("opacity",0.3)
+                .attr("class","hidden hideable")
+        }
+
+        const treeFig = new FigTree(document.getElementById("spread"),{left:0,right:0,top:0,bottom:0},tree)
+            .layout(geographicLayout(projection))
+            .nodes(
+                circle()
+                    .filter(d=>!d.children)
+                    .attr("r",d=>d.annotations.hovered?10:5)
+                    .style('fill',d=>cScale(d.annotations.date))
+                    .onHover(d=>{
+                        tree.annotateNode(tree.getExternalNode(d.name),{"hovered":!d.annotations.hovered})
+
+                        tree.treeUpdateCallback();
+                    })
+            )
+            .nodeBackgrounds(
+                circle()
+                    .filter(d=>!d.children)
+                    .attr("r",d=>d.annotations.hovered?12:7)
+                    .style("fill",cScale(2020))
+
+            )
+            .branches(branch()
+                .curve(d3.curveBasis)
+                .style("stroke",d=>d.annotations.LS_median? lsScale(d.annotations.LS_median):lsScale(0))
+                .style("stroke-width",d=>d.annotations.hovered?5:2)
+                .onHover(d=>{
+                        tree.annotateNode(d,{"hovered":!d.annotations.hovered})
+                        tree.treeUpdateCallback();
+                    }))
+        treeFig.svgSelection
+            .attr("class","hidden hideable")
+
+        tree.orderByNodeDensity(false)
+        const mccCircles =  circle()
+            .filter(d=>!d.children)
+            .attr("r",d=>d.annotations.hovered?10:5)
+            .style('fill',d=>cScale(d.annotations.date))
+            .onHover(d=>{
+                tree.annotateNode(tree.getExternalNode(d.name),{"hovered":!tree.getExternalNode(d.name).annotations.hovered})
+
+                tree.treeUpdateCallback();
+            })
+        const mccfig = new FigTree(document.getElementById("spread"),initialMargins,tree)
+            .layout(rectangularLayout)
+            .nodes(
+                mccCircles,
+                tipLabel(d=>d.name.split("|").splice(-2).join(" "))
+
+            )
+            .nodeBackgrounds(
+                circle()
+                    .filter(d=>!d.children)
+                    .attr("r",d=>d.annotations.hovered?12:7)
+                    .style("fill",cScale(2020))
+
+            )
+            .branches(branch()
+            .style("stroke",d=>d.annotations.LS_median? lsScale(d.annotations.LS_median):lsScale(0))
+                .style("stroke-width",d=>d.annotations.hovered?5:2)
+
+            .onHover(d=>{
+                console.log(d)
+                tree.annotateNode(d,{"hovered":!d.annotations.hovered})
+                tree.treeUpdateCallback();
+            }))
+
+        mccfig.svgSelection
+            .attr("class","hidden hideable")
+        const timeAxis =                 axis()
+            .location("bottom")
+            .y((height-fullMargins.top-fullMargins.bottom+15))
+            .x(0)
+            .title({text:"Date",
+                yPadding:30})
+            .tickFormat(d3.format(".0f"))
+
+
+
+    }
+
+</script>
+</body>
+</html>

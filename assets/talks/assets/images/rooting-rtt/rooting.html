@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- <title>Title</title> -->
+    <script src="/assets/talks/assets/js/d3.v7.min.js"></script>
+    <script src="/assets/talks/assets/js/constants.js"></script>
+
+    <link rel="stylesheet" href="/assets/talks/assets/css/figure.css" />
+  </head>
+  <body>
+    <div class="figure-div" id="fig"></div>
+    <style>
+      .branch .branch-path {
+        fill: none;
+        /* stroke: #541753;*/
+        stroke-width: 2px;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        cursor: pointer;
+      }
+    </style>
+    <script type="module">
+      import {
+        Tree,
+        FigTree,
+        roughBranch,
+        roughCircle,
+        rectangle,
+        axis,
+        axisBars,
+        trendLine,
+        circle,
+        branch,
+        tipLabel,
+        textAnnotation,
+        rectangularLayout,
+        equalAngleLayout,
+        rootToTipLayout,
+        reverseNunoLayout,
+      } from "/assets/talks/assets/js/figtree.esm.9a3e.js";
+
+      const svgSelection = d3
+        .select("#fig")
+        .append("svg")
+        .attr("class", "tree")
+        .attr("id", "figtree")
+        .attr("width", width)
+        .attr("height", height);
+
+      const leftFigMargins = { top: 50, bottom: 50, left: 10, right: 700 };
+      const centerFigMargins = {
+        top: 50,
+        bottom: 50,
+        left: 500,
+        right: 600,
+      };
+      const rightFigMargins = { top: 50, bottom: 50, left: 650, right: 30 };
+
+
+      const timeTreeString =
+        "((((virusA_1975[&location=4]:20.0,virusB_1965[&location=4]:10.0)[&location=]:10.0,virusC_1985[&location=1]:44.0)[&location=1]:15.0,(virusD_1970[&location=2]:35.0,virusE_1955[&location=2]:20.0)[&location=2]:5.0)[&location=2]:25.0,(virusF_2000[&location=3]:55.0,virusG_1960[&location=3]:15.0)[&location=3]:40.0)[&location=3];";
+      const baseTimeTree = Tree.parseNewick(timeTreeString, {
+        datePrefix: "_",
+      });
+
+      const annotateHover = (nodes) => {
+        nodes.forEach((node) => {
+          baseTimeTree.annotateNode(node, { hover: !node.annotations.hover });
+        });
+        baseTimeTree.treeUpdateCallback();
+      };
+      baseTimeTree.reroot(baseTimeTree.getExternalNode("virusA_1975"), 0.5);
+
+      baseTimeTree.nodes.forEach((node) => {
+              node.length = node.length * 1.1e-3;
+            });
+
+      const colorScale = d3
+        .scaleOrdinal(d3.schemeTableau10)
+        .domain([1, 2, 3, 4, 5]);
+
+      const unRootedFig = new FigTree(
+        document.getElementById("figtree"),
+        leftFigMargins,
+        baseTimeTree
+      )
+        .layout(equalAngleLayout(baseTimeTree.internalNodes[5]))
+        .nodes(
+          circle()
+            .filter((n) => !n.children)
+            .attr("r", (n) => (n.annotations.hovered ? 10 : 5))
+            .attr("fill", (d) => colorScale(d.annotations.location))
+            .annotateOnHover("hovered"),
+          rectangle()
+            .filter((n) => n === baseTimeTree.root)
+            .attr("width", 5)
+            .attr("height", 5)
+            .attr("fill", colorScale(6))
+            .attr("stroke", "grey"),
+          tipLabel((n) => n.name.split("_")[1])
+        )
+        .nodeBackgrounds(
+          circle()
+            .filter((n) => !n.children)
+            .attr("r", 7)
+            .attr("fill", "black")
+            .rotateOnClick("false")
+        )
+        .branches(
+          branch()
+            .style("stroke-width", 2)
+            .reRootOnClick("euclidean")
+            .curve(d3.curveLinear)
+        );
+
+      const makeRootedFigure = () => {
+        const rootedFigTree = new FigTree(
+          document.getElementById("figtree"),
+          centerFigMargins,
+          baseTimeTree
+        )
+          .layout(reverseNunoLayout)
+          .nodes(
+            circle()
+              .filter((n) => !n.children)
+              .attr("r", (n) => (n.annotations.hovered ? 10 : 5))
+              .attr("fill", (d) => colorScale(d.annotations.location))
+              .rotateOnClick()
+              .annotateOnHover("hovered"),
+            rectangle()
+              .filter((n) => n === baseTimeTree.root)
+              .attr("width", 5)
+              .attr("height", 5)
+              .attr("fill", colorScale(6))
+              .attr("stroke", "grey"),
+            tipLabel((n) => n.name.split("_")[1])
+          )
+          .nodeBackgrounds(
+            circle()
+              .filter((n) => !n.children)
+              .attr("r", 7)
+              .attr("fill", "black")
+              .rotateOnClick("false")
+          )
+          .branches(
+            branch()
+              .style("stroke-width", 2)
+              .curve(d3.curveStepAfter)
+              .reRootOnClick()
+          );
+      };
+
+      const makeRTTplot = () => {
+        const rootToTipPlot = new FigTree(
+          document.getElementById("figtree"),
+          rightFigMargins,
+          baseTimeTree
+        )
+          .layout(rootToTipLayout)
+          .nodes(
+            circle()
+              .filter((d) => !d.children)
+              .attr("r", (d) => (d.annotations.hovered ? 10 : 5))
+              .attr("fill", (d) => colorScale(d.annotations.location))
+              .annotateOnHover("hovered")
+          )
+          .nodeBackgrounds(circle().attr("r", 7))
+          .feature(
+            axis()
+              .location("bottom")
+              .y(height - rightFigMargins.top - rightFigMargins.bottom + 5)
+              .x(0)
+              // .title({ text: "Date", yPadding: 40 })
+              .tickFormat(d3.format(".0f"))
+          )
+          .feature(
+            axis()
+              .location("left")
+              .y(0)
+              .x(-5)
+              .title({ text: "Divergence", xPadding: -80, rotation: -90 })
+              .tickFormat(d3.format(".3f"))
+              .ticks(4)
+          )
+          .feature(trendLine());
+      };
+      makeRootedFigure();
+      makeRTTplot()
+      // window._transitions = [
+      //   {
+      //     transitionForward: () => {
+      //     },
+      //   },
+      //   {
+      //     transitionForward: () =>,
+      //   },
+      // ];
+    </script>
+  </body>
+</html>

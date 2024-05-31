@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- <title>Title</title> -->
+    <script src="/assets/talks/assets/js/d3.v7.min.js"></script>
+    <script src="/assets/talks/assets/js/legend.js"></script>
+    <script src="/assets/talks/assets/js/constants.js"></script>
+    <script src="/assets/talks/assets/js/datFormat.js"></script>
+    <link rel="stylesheet" href="/assets/talks/assets/css/figure.css" />
+    <link rel="stylesheet" href="/assets/talks/assets/css/figure.css" />
+
+</head>
+<body>
+<div class="figure-div" id="fig" ></div>
+<script type="module">
+    import {Tree,FigTree,roughCircle,circle,axis,roughBranch,predicatedRootToTipLayout,tipLabel,rootToTipLayout,branch,trendLine,textAnnotation,rectangularLayout} from "/assets/talks/assets/js/figtree.esm.27e9.js";
+    const height=300;
+    const svgSelection = d3.select("#fig")
+        .append("svg")
+        .attr("class","tree")
+        .attr("id","rtt")
+        .attr("width",width)
+        .attr("height",height)
+
+    const left=10;
+    const right=50;
+    const innterPadding = 110;
+
+    const figureWidth = (width-left-right-(innterPadding))/2;
+    // const renderedSize=document.getElementById("allPlots").getBoundingClientRect();
+    //
+    //
+    // const heightFactor=Math.max(1,renderedSize.height/height);
+    // const widthFactor=Math.max(1,renderedSize.width/width);
+
+    const margins=(i)=>{
+        const margin =  {top:10,bottom:70,
+            left:(left+i*figureWidth+i*innterPadding),
+            right:(right+Math.abs(1-i)*innterPadding+Math.abs(1-i)*figureWidth) }
+        return margin
+    };
+
+    // data processing
+    const timeTreeString =  '((((virusA_1975:20.0,virusB_1965:10.0):10.0,virusC_1985:44.0):15.0,(virusD_1970:35.0,virusE_1955:20.0):5.0):25.0,(virusF_2000:55.0,virusG_1960:15.0):40.0);';
+
+    const tree = Tree.parseNewick(timeTreeString, {datePrefix: "_"});
+    const treeRTT = Tree.parseNewick(timeTreeString, {datePrefix: "_"});
+    const maxDate = d3.max(treeRTT.externalNodes, d => d.annotations.date)
+    //Figures
+    console.log(maxDate)
+    const divergenceFig = new FigTree(document.getElementById("rtt"),margins(0),tree)
+        .layout(rectangularLayout)
+        .nodes(
+            roughCircle()
+                .filter(d=>!d.children)
+                .radius(10)
+                .fillAttr("stroke","#08306b")
+                .fillAttr("stroke-width",2)
+                .strokeAttr("stoke","black")    
+        )
+        .nodeBackgrounds(
+            circle()
+                .filter(d=>!d.children)
+                .attr("r",7)
+                .style("fill","white")
+        )
+        .branches(roughBranch()
+            .style("stroke",d=>d.parent.annotations.insertedNode && d.annotations.insertedNode?"#a3b9cc":"#08306b")
+            .attr("stroke-width",3))
+        .feature(
+            axis()
+                .location("bottom")
+                .y(height - margins(0).top - margins(0).bottom + 5)
+                .x(0)
+                .title({
+                    text: "",
+                    yPadding: 30
+                })
+                .tickFormat(customFormat("%Y")) //defined below for dates
+                .ticks(6)
+                .origin(maxDate)
+        )
+
+    const rootToTipPlot = new FigTree(document.getElementById("rtt"),margins(1),treeRTT)
+        .layout(rootToTipLayout)
+        .nodes(
+            roughCircle()
+                .filter(d=>!d.children)
+                .radius(10)
+                .fillAttr("stroke","#08306b")
+                .fillAttr("stroke-width",2)
+                .strokeAttr("stoke","black")    
+        )
+        .nodeBackgrounds(
+            circle()
+                .filter(d=>!d.children)
+                .attr("r",7)
+                .style("fill","white")
+        )
+        .feature( axis()
+            .location("bottom")
+            .y(height - margins(0).top - margins(0).bottom + 5)
+            .x(0)
+            .title({
+                text: "",
+                yPadding: 30
+            })
+            .tickFormat(customFormat("%Y")) //defined below for dates
+            .ticks(6)
+            .origin(maxDate))
+        .feature(
+            axis()
+                .location("left")
+                .y(0)
+                .x(-5)
+                .title({text:"Divergence",
+                    xPadding:-60,
+                    rotation:-90})
+                .tickFormat(d3.format(".1f"))
+                .ticks(4)
+        )
+        .feature(trendLine())
+
+    const addTime1=()=>{
+        const node1 = tree.getExternalNode("virusC_1985")
+        const node2 = treeRTT.getExternalNode("virusC_1985")
+        tree.splitBranch(node1,0.2);
+        tree.splitBranch(node1,0.8);
+
+        node2.length = node2.length*0.1;
+        rootToTipPlot.layout(predicatedRootToTipLayout(d=>d!==node2))
+        treeRTT.treeUpdateCallback();
+        tree.treeUpdateCallback();
+
+    };
+    const addTime2=()=>{
+
+        const node1 = tree.getExternalNode("virusF_2000").parent
+        const node2 = treeRTT.getExternalNode("virusF_2000").parent
+        tree.splitBranch(node1,0.2);
+        tree.splitBranch(node1,0.8);
+
+        node2.length = node2.length*0.3;
+        const excluded =["virusC_1985","virusF_2000","virusG_1960"]
+        rootToTipPlot.layout(predicatedRootToTipLayout(d=>!excluded.includes(d.name)))
+        treeRTT.treeUpdateCallback();
+        tree.treeUpdateCallback();
+
+    };
+
+    var _transitions = [
+
+        {
+            transitionForward: ()=> addTime1(),
+        },
+        {
+            transitionForward: ()=> addTime2(),
+        },
+
+    ];
+    window._transitions = _transitions;
+
+</script>
+
+<!--<script type="module">-->
+
+
+<!--    import {Tree,FigTree,circle,axis,tipLabel,rootToTipLayout,branch,trendLine,textAnnotation,rectangularLayout} from "/assets/talks/assets/js/figtree.esm.27e9.js";-->
+<!--    const width = 750,-->
+<!--        height = 300;-->
+<!--    const svgSelection = d3.select("#fig")-->
+<!--        .append("svg")-->
+<!--        .attr("class","tree")-->
+<!--        .attr("id","rtt")-->
+<!--        .attr("width",width)-->
+<!--        .attr("height",height)-->
+
+
+<!--    const margins1 = { top: 10, bottom: 60, left: 100, right: 395};-->
+<!--    const margins2 = { top: 10, bottom: 60, left: 410, right: 10};-->
+
+<!--    let reveal;-->
+<!--    let hide;-->
+
+<!--    let reroot;-->
+<!--    let unreroot;-->
+<!--    let og_root;-->
+<!--    let unog_root;-->
+
+<!--    fetch("../data/set15-gp.heuristic.rooted.tree").then(d=>d.text()).then(-->
+<!--        treeText => {-->
+<!--            const tree = Tree.parseNexus(treeText,{datePrefix: "|",dateFormat: "%Y-%m-%d"})[0];-->
+<!--            tree.reroot(tree.getExternalNode("KR063671|Yambuku-Mayinga|DRC|1976-10-01").parent,0.97) //R2 0.844-->
+<!--            // console.log(tree)-->
+
+<!--            tree.orderByNodeDensity(false)-->
+<!--            tree.externalNodes.filter(n => n.annotations.date > 2014.4).forEach(n=>tree.annotateNode(n,{"special":true}));-->
+
+<!--            const rootToTipPlot = new FigTree(document.getElementById("rtt"),margins1,tree)-->
+<!--                .layout(rootToTipLayout)-->
+<!--                .nodes(-->
+<!--                    circle()-->
+<!--                        .filter(d=>!d.children)-->
+<!--                        .attr("r",d=>d.annotations.hovered?10:5)-->
+<!--                        .annotateOnHover("hovered")-->
+
+<!--                )-->
+<!--                .nodeBackgrounds(-->
+<!--                    circle()-->
+<!--                        .attr("r",7)-->
+<!--                )-->
+<!--                .feature(-->
+<!--                    axis()-->
+<!--                        .location("bottom")-->
+<!--                        .y(height-margins1.top-margins1.bottom+5)-->
+<!--                        .x(0)-->
+<!--                        .title({text:"Date",-->
+<!--                            yPadding:40})-->
+<!--                        .tickFormat(d3.format(".0f"))-->
+<!--                )-->
+<!--                .feature(-->
+<!--                    axis()-->
+<!--                        .location("left")-->
+<!--                        .y(0)-->
+<!--                        .x(-5)-->
+<!--                        .title({text:"Divergence",-->
+<!--                            xPadding:-80,-->
+<!--                            rotation:-90})-->
+<!--                        .tickFormat(d3.format(".3f"))-->
+<!--                        .ticks(4)-->
+<!--                )-->
+<!--                .feature(trendLine())-->
+
+
+
+
+<!--            rootToTipPlot-->
+<!--                .feature(textAnnotation()-->
+<!--                    .text(()=>`Rate:${ d3.format("0.2e")(rootToTipPlot.regression.slope)}`)-->
+<!--                    .y(40)-->
+<!--                    .x(30))-->
+<!--            rootToTipPlot-->
+<!--                .feature(textAnnotation()-->
+<!--                    .text(()=>`TMRCA:${d3.format("0.0f")(rootToTipPlot.regression.xIntercept)}`)-->
+<!--                    .y(65)-->
+<!--                    .x(30))-->
+<!--            rootToTipPlot-->
+<!--                .feature(textAnnotation()-->
+<!--                    .text(()=>`R^2:${d3.format("0.3f")(rootToTipPlot.regression.rSquare)}`)-->
+<!--                    .y(90)-->
+<!--                    .x(30));-->
+
+<!--            const divergenceFig = new FigTree(document.getElementById("rtt"),margins2,tree)-->
+<!--                .layout(rectangularLayout)-->
+<!--                .nodes(-->
+<!--                    circle()-->
+<!--                        .filter(d=>!d.children)-->
+<!--                        .attr("r",d=>d.annotations.hovered?10:5)-->
+<!--                        .annotateOnHover("hovered")-->
+<!--                )-->
+<!--                .nodeBackgrounds(-->
+<!--                    circle()-->
+<!--                        .filter(d=>!d.children)-->
+<!--                        .attr("r",7)-->
+<!--                )-->
+<!--                .branches(branch()-->
+<!--                    .attr("stroke","black")-->
+<!--                    .attr("stroke-width",4)-->
+<!--                    .reRootOnClick())-->
+<!--                .feature(-->
+<!--                    axis()-->
+<!--                        .location("bottom")-->
+<!--                        .y(height-margins2.top-margins2.bottom+5)-->
+<!--                        .x(0)-->
+<!--                        .title({text:"Divergence",-->
+<!--                            yPadding:40})-->
+<!--                        .tickFormat(d3.format(".3f"))-->
+<!--                )-->
+
+<!--            hide=()=> {-->
+<!--                tree.nodes.filter(n => n.annotations.date > 2014.4)-->
+<!--                    .forEach(n => {-->
+<!--                            rootToTipPlot.ignoreAndHide(n, true);-->
+<!--                            divergenceFig.ignoreAndHide(n);-->
+<!--                            divergenceFig.ignoreAndHide(n.parent, true);-->
+<!--                        }-->
+<!--                    );-->
+<!--            }-->
+<!--            hide();-->
+<!--            reveal =() =>{-->
+<!--                tree.nodes.filter(n => n.annotations.date > 2014.4)-->
+<!--                    .forEach(n => {-->
+<!--                            rootToTipPlot.reveal(n, true);-->
+<!--                            divergenceFig.reveal(n);-->
+<!--                            divergenceFig.reveal(n.parent, true);-->
+<!--                        }-->
+<!--                    );-->
+<!--            }-->
+
+<!--            reroot = () =>{-->
+<!--                tree.reroot(tree.getExternalNode("KJ660347|Makona-Gueckedou-C07|Guinea|2014-03-20"),0.1)-->
+<!--                tree.treeUpdateCallback();-->
+<!--            }-->
+
+<!--            unreroot =()=>{-->
+<!--                tree.reroot(tree.getExternalNode("KR063671|Yambuku-Mayinga|DRC|1976-10-01").parent,0.97) //R2 0.844-->
+<!--                tree.treeUpdateCallback();-->
+
+<!--            }-->
+<!--            og_root = () =>{-->
+<!--                tree.reroot(tree.getExternalNode("KR063671|Yambuku-Mayinga|DRC|1976-10-01").parent,0.97) //R2 0.844-->
+<!--                tree.nodes.filter(n => n.annotations.date > 2014.4)-->
+<!--                    .forEach(n => {-->
+<!--                        rootToTipPlot.ignore(n, true);-->
+<!--                    });-->
+<!--            }-->
+<!--            unog_root =() =>{-->
+<!--                tree.reroot(tree.getExternalNode("KJ660347|Makona-Gueckedou-C07|Guinea|2014-03-20"),0.1);-->
+<!--                tree.nodes.filter(n => n.annotations.date > 2014.4)-->
+<!--                    .forEach(n => {-->
+<!--                        rootToTipPlot.notice(n, true);-->
+<!--                    });-->
+
+<!--            }-->
+
+
+<!--        });-->
+
+
+<!--    window._transitions = [-->
+<!--        {   transitionForward: () => {reveal()},-->
+<!--            transitionBackward: () => hide(), // optional-->
+<!--            index: 0 // optional-->
+<!--        }, { transitionForward:()=> reroot(),-->
+<!--            transitionBackward: ()=>unreroot() , // optional-->
+<!--            index: 1 // optional-->
+<!--        },-->
+<!--        { transitionForward:()=> og_root(),-->
+<!--            transitionBackward: ()=>unog_root() , // optional-->
+<!--            index: 2 // optional-->
+<!--        }-->
+<!--    ]-->
+
+
+<!--</script>-->
+</body>
+</html>

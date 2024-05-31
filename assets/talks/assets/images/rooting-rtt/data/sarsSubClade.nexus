@@ -1,0 +1,335 @@
+#NEXUS
+begin taxa;
+	dimensions ntax=233;
+	taxlabels
+	'Argentina/PAIS_A001/2020|2020-03-01'
+	'Argentina/PAIS_A021/2020|2020-04-11'
+	'Argentina/PAIS_A027/2020|2020-04-19'
+	'Austria/CeMM0045/2020|2020-02-24'
+	'Austria/CeMM0171/2020|2020-03-07'
+	'Austria/CeMM0247/2020|2020-03-21'
+	'Austria/CeMM0360/2020|2020-04-05'
+	'Austria/CeMM0364/2020|2020-04-05'
+	'Bangladesh/BCSIR-NILMRC_050/2020|2020-05-21'
+	'Bangladesh/BCSIR-NILMRC_051/2020|2020-05-07'
+	'Bangladesh/BCSIR-NILMRC_054/2020|2020-06-01'
+	'Bangladesh/BCSIR-NILMRC_057/2020|2020-05-10'
+	'Bangladesh/BCSIR-NILMRC_064/2020|2020-05-31'
+	'Bangladesh/BCSIR-NILMRC_072/2020|2020-05-26'
+	'Bangladesh/BCSIR-NILMRC_074/2020|2020-06-01'
+	'Bangladesh/BCSIR-NILMRC_075/2020|2020-06-01'
+	'Bangladesh/BCSIR-NILMRC_076/2020|2020-06-01'
+	'Bangladesh/BCSIR-NILMRC_077/2020|2020-06-01'
+	'Bangladesh/BCSIR-NILMRC_078/2020|2020-06-01'
+	'Bangladesh/BCSIR-NILMRC_083/2020|2020-06-01'
+	'Bangladesh/BCSIR-NILMRC_086/2020|2020-06-01'
+	'Bangladesh/BCSIR-NILMRC_090/2020|2020-06-02'
+	'Bangladesh/BCSIR-NILMRC_094/2020|2020-05-23'
+	'Bangladesh/BCSIR-NILMRC_095/2020|2020-05-23'
+	'Bangladesh/BCSIR_NILMRC_008/2020|2020-05-21'
+	'Bangladesh/CHRF_0003/2020|2020-04-17'
+	'Bangladesh/CHRF_0004/2020|2020-04-17'
+	'Bangladesh/CHRF_0008/2020|2020-05-16'
+	'Bangladesh/DU_50758/2020|2020-05-06'
+	'Bangladesh/DU_CARS_5586/2020|2020-05-13'
+	'Bangladesh/icddrb-2083/2020|2020-06-07'
+	'Beijing/IVDC-01-06/2020|2020-06-11'
+	'Beijing/IVDC-02-06/2020|2020-06-11'
+	'Belgium/030959/2020|2020-03-09'
+	'Belgium/ULG-10151/2020|2020-04-18'
+	'Bosnia_and_Herzegovina/01-Livno/2020|2020-05-27'
+	'Brazil/RJ-1719/2020|2020-04-06'
+	'Brazil/RJ-2044/2020|2020-04-15'
+	'Brazil/SP-606/2020|2020-04-10'
+	'Canada/ON-UHTC_0074/2020|2020-04-24'
+	'Chile/Copiapo-00006/2020|2020-04-29'
+	'Chile/Santiago_40/2020|2020-03-17'
+	'Chile/Santiago_78/2020|2020-04-04'
+	'Colombia/Bogota78390/2020|2020-03-06'
+	'Colombia/INS-103303/2020|2020-04-26'
+	'Cyprus/001/2020|2020-03-11'
+	'Cyprus/002/2020|2020-03-22'
+	'Cyprus/004/2020|2020-03-23'
+	'Cyprus/006/2020|2020-04-11'
+	'Cyprus/008/2020|2020-04-27'
+	'Czech_Republic/ChVir1912/2020|2020-03-05'
+	'DRC/1376/2020|2020-04-07'
+	'Denmark/ALAB-HH-266/2020|2020-05-09'
+	'Denmark/ALAB-SSI-1393/2020|2020-04-05'
+	'Ecuador/HGSQ-USFQ-018/2020|2020-03-30'
+	'Ecuador/USFQ-045/2020|2020-04-17'
+	'Ecuador/USFQ-106/2020|2020-05-19'
+	'Ecuador/USFQ-112/2020|2020-05-19'
+	'Ecuador/USFQ-707/2020|2020-06-04'
+	'England/20109097703/2020|2020-03-08'
+	'England/20130071804/2020|2020-02-23'
+	'England/BIRM-61331/2020|2020-06-13'
+	'England/BRIS-12DB0B/2020|2020-05-31'
+	'England/BRIS-12DDD8/2020|2020-06-01'
+	'England/CAMB-1AC5E8/2020|2020-04-23'
+	'England/CAMB-1AC74C/2020|2020-04-23'
+	'England/CAMB-1B3ED4/2020|2020-06-08'
+	'England/CAMB-1B45B0/2020|2020-06-02'
+	'England/CAMB-1B4ADF/2020|2020-06-10'
+	'England/CAMB-1B4C8E/2020|2020-06-14'
+	'England/CAMB-1B4F1C/2020|2020-06-18'
+	'England/CAMB-1B4F49/2020|2020-06-18'
+	'England/CAMB-1B4F94/2020|2020-06-18'
+	'England/CAMB-1B4FC1/2020|2020-06-18'
+	'England/CAMB-1B5036/2020|2020-06-21'
+	'England/CAMB-1B50BE/2020|2020-06-19'
+	'England/HECH-259A097/2020|2020-05-18'
+	'England/LCST-24D6B26/2020|2020-06-07'
+	'England/LCST-24D6C05/2020|2020-06-09'
+	'England/LCST-24D6CF6/2020|2020-06-10'
+	'England/LCST-24D6E0F/2020|2020-06-11'
+	'England/LCST-24D6F84/2020|2020-06-15'
+	'England/LCST-24D6FB1/2020|2020-06-15'
+	'England/LCST-24D6FC0/2020|2020-06-16'
+	'England/LCST-24D6FEE/2020|2020-06-16'
+	'England/LCST-24D6FFD/2020|2020-06-16'
+	'England/LCST-24D7008/2020|2020-06-17'
+	'England/LCST-24D7017/2020|2020-06-17'
+	'England/LCST-24D7026/2020|2020-06-17'
+	'England/LCST-24D7035/2020|2020-06-17'
+	'England/LCST-24D7114/2020|2020-06-14'
+	'England/LCST-24D7141/2020|2020-06-15'
+	'England/LIVE-9FF81/2020|2020-06-08'
+	'England/LIVE-A0318/2020|2020-05-23'
+	'England/LIVE-A0C2C/2020|2020-06-15'
+	'England/LIVE-A0C95/2020|2020-06-10'
+	'England/NOTT-1118F4/2020|2020-05-28'
+	'England/NOTT-112037/2020|2020-06-16'
+	'England/PHEC-20FFE/2020|2020-02-16'
+	'England/SHEF-C1399/2020|2020-06-15'
+	'England/SHEF-C317F/2020|2020-06-14'
+	'England/SHEF-C31D9/2020|2020-06-15'
+	'England/SHEF-C66F5/2020|2020-06-15'
+	'England/SHEF-C8FCB/2020|2020-06-07'
+	'England/SHEF-CB168/2020|2020-06-16'
+	'England/SHEF-CCD18/2020|2020-06-11'
+	'England/SHEF-CD9E6/2020|2020-06-13'
+	'England/SHEF-D0537/2020|2020-06-14'
+	'England/SHEF-D0CE7/2020|2020-06-14'
+	'Gambia/0528/2020|2020-04-30'
+	'Gambia/0536/2020|2020-04-30'
+	'Gambia/0548/2020|2020-04-30'
+	'Gambia/1094/2020|2020-05-04'
+	'Gambia/1251/2020|2020-05-07'
+	'Gambia/1264/2020|2020-05-07'
+	'Gambia/GC19-015/2020|2020-03-17'
+	'Germany/BAV-MVP0184/2020|2020-04-13'
+	'Germany/BAV-MVP0221/2020|2020-04-22'
+	'Germany/BAV-MVP0281/2020|2020-05-07'
+	'Germany/BAV-MVP0283/2020|2020-05-11'
+	'Germany/FrankfurtFFM4/2020|2020-03-02'
+	'Germany/NRW-13/2020|2020-03-11'
+	'Ghana/2914_S8/2020|2020-03-30'
+	'Greece/12/2020|2020-03-18'
+	'Greece/34_36284/2020|2020-03-24'
+	'Hong_Kong/VM20009579/2020|2020-03-16'
+	'Hungary/SRC-00055/2020|2020-03-20'
+	'Hungary/SRC-03670w/2020|2020-03-29'
+	'India/ILSCV15552/2020|2020-05-11'
+	'India/ILSCV20557/2020|2020-05-15'
+	'India/NGC-CDFD-32/2020|2020-05-30'
+	'India/NIV-12019/2020|2020-04-20'
+	'India/NIV-9314/2020|2020-04-13'
+	'Israel/13075882/2020|2020-03-30'
+	'Italy/BG-7158-24Feb/2020|2020-02-24'
+	'Japan/Donner27/2020|2020-04-24'
+	'Japan/Donner32/2020|2020-05-03'
+	'Japan/Donner34/2020|2020-05-07'
+	'Japan/Donner36/2020|2020-05-11'
+	'Japan/Donner37/2020|2020-05-14'
+	'Japan/Donner6/2020|2020-04-06'
+	'Japan/P4-5/2020|2020-03-18'
+	'Japan/P5-3/2020|2020-03-13'
+	'Jordan/SR-055/2020|2020-04-02'
+	'Latvia/014/2020|2020-03-22'
+	'Latvia/022/2020|2020-04-28'
+	'Latvia/024/2020|2020-04-19'
+	'Lebanon/S4_761/2020|2020-03-04'
+	'Mexico/CDMX-InDRE_07/2020|2020-02-28'
+	'Morocco/15N/2020|2020-05-15'
+	'Morocco/6887/2020|2020-03-03'
+	'Morocco/6906/2020|2020-04-06'
+	'Netherlands/Gelderland_49/2020|2020-05-16'
+	'New_Zealand/20VR0712/2020|2020-03-11'
+	'New_Zealand/20VR3004/2020|2020-04-25'
+	'Nigeria/Lagos01/2020|2020-02-27'
+	'Oman/205033010/2020|2020-05-01'
+	'Oman/205033391/2020|2020-05-03'
+	'Peru/010/2020|2020-03-10'
+	'Poland/IHG_PAS_1_69/2020|2020-04-11'
+	'Poland/IHG_PAS_3_57/2020|2020-05-13'
+	'Poland/PL_P20/2020|2020-04-07'
+	'Poland/Pom6/2020|2020-04-23'
+	'Poland/Pom8/2020|2020-04-27'
+	'Poland/Pom9/2020|2020-04-27'
+	'Poland/Sla2/2020|2020-05-05'
+	'Poland/Sla3/2020|2020-05-05'
+	'Poland/Sla9/2020|2020-05-05'
+	'Portugal/PT0007/2020|2020-03-07'
+	'Portugal/PT0556/2020|2020-04-20'
+	'Portugal/PT0608/2020|2020-03-14'
+	'Romania/278406/2020|2020-04-30'
+	'Romania/284489/2020|2020-05-14'
+	'Romania/Bucuresti-4105/2020|2020-03-21'
+	'Romania/Buzau-291946/2020|2020-06-01'
+	'Romania/Buzau-292711/2020|2020-06-03'
+	'Romania/Buzau-293197/2020|2020-06-03'
+	'Romania/Valcea/2020|2020-06-07'
+	'Russia/Moscow-67609/2020|2020-03-16'
+	'Russia/Moscow_PMVL-3/2020|2020-05-05'
+	'Russia/Moscow_PMVL-5/2020|2020-05-05'
+	'Russia/StPetersburg-RII4728S/2020|2020-04-07'
+	'Russia/StPetersburg-RII6840S/2020|2020-04-15'
+	'Russia/StPetersburg-RII7555S/2020|2020-04-21'
+	'Scotland/EDB2092/2020|2020-04-19'
+	'Scotland/EDB3857/2020|2020-04-30'
+	'Scotland/EDB6517/2020|2020-06-15'
+	'Scotland/EDB6535/2020|2020-06-17'
+	'Serbia/CA3089-04/2020|2020-04-25'
+	'Serbia/KV26-04/2020|2020-04-04'
+	'Serbia/KV26/2020|2020-04-13'
+	'Serbia/NP363-04/2020|2020-04-04'
+	'SouthAfrica/KRISP-107/2020|2020-05-04'
+	'SouthAfrica/Tygerberg_42/2020|2020-04-08'
+	'South_Africa/KRISP-0125/2020|2020-05-13'
+	'South_Africa/KRISP-0129/2020|2020-05-13'
+	'South_Africa/KRISP-0133/2020|2020-05-13'
+	'South_Africa/KRISP-0139/2020|2020-05-16'
+	'South_Africa/KRISP-0143/2020|2020-05-21'
+	'South_Africa/KRISP-0157/2020|2020-05-25'
+	'South_Africa/KRISP-0165/2020|2020-05-29'
+	'South_Africa/KRISP-0170/2020|2020-05-31'
+	'Spain/Donostia-San_Sebastian2110/2020|2020-04-11'
+	'Sri_Lanka/COV53/2020|2020-03-10'
+	'Sweden/20-14827/2020|2020-05-19'
+	'Sweden/20-19008/2020|2020-05-27'
+	'Sweden/20-19192/2020|2020-05-28'
+	'Sweden/20-51311/2020|2020-05-07'
+	'Sweden/20-51350/2020|2020-05-11'
+	'Sweden/20-51445/2020|2020-05-14'
+	'Sweden/20-51474/2020|2020-05-14'
+	'Sweden/20-51618/2020|2020-05-20'
+	'Sweden/20-51758/2020|2020-05-27'
+	'Sweden/20-51891/2020|2020-06-03'
+	'Switzerland/100070/2020|2020-03-12'
+	'Switzerland/100153/2020|2020-03-16'
+	'Switzerland/120070/2020|2020-04-20'
+	'Switzerland/120230/2020|2020-05-01'
+	'Switzerland/130015/2020|2020-05-07'
+	'Switzerland/130020/2020|2020-05-08'
+	'Switzerland/130026/2020|2020-05-12'
+	'Taiwan/78/2020|2020-03-16'
+	'Thailand/Bangkok-0066/2020|2020-03-29'
+	'Turkey/HSGM-302/2020|2020-03-27'
+	'Turkey/IMU-SP-01/2020|2020-04-15'
+	'Uruguay/UY-NYUMC861/2020|2020-03-25'
+	'Vietnam/VNHN_1528/2020|2020-03-22'
+	'Wales/PHWC-162645/2020|2020-05-27'
+	'Wales/PHWC-162BFB/2020|2020-05-27'
+	'Wales/PHWC-162E01/2020|2020-05-20'
+	'Wales/PHWC-16476E/2020|2020-06-10'
+	'Wales/PHWC-165220/2020|2020-06-09'
+	'Wales/PHWC-165448/2020|2020-06-10'
+;
+end;
+
+begin trees;
+	tree tree_1 = [&R] ('Sweden/20-51445/2020|2020-05-14':6.8E-5,'Sweden/20-19008/2020|2020-05-27':1.36E-4,'Vietnam/VNHN_1528/2020|2020-03-22':6.8E-5,'Austria/CeMM0045/2020|2020-02-24':0.0,'Japan/P5-3/2020|2020-03-13':3.4E-5,'Switzerland/100153/2020|2020-03-16':0.0,'England/LCST-24D6F84/2020|2020-06-15':0.0,'Sri_Lanka/COV53/2020|2020-03-10':0.0,'Japan/P4-5/2020|2020-03-18':0.0,'Hungary/SRC-03670w/2020|2020-03-29':0.0,'Turkey/HSGM-302/2020|2020-03-27':0.0,'Chile/Santiago_40/2020|2020-03-17':0.0,'Hong_Kong/VM20009579/2020|2020-03-16':0.0,'Lebanon/S4_761/2020|2020-03-04':0.0,'Mexico/CDMX-InDRE_07/2020|2020-02-28':0.0,'New_Zealand/20VR0712/2020|2020-03-11':0.0,'Morocco/6887/2020|2020-03-03':0.0,'Morocco/6906/2020|2020-04-06':0.0,'Cyprus/001/2020|2020-03-11':0.0,'Cyprus/006/2020|2020-04-11':0.0,'Russia/StPetersburg-RII7555S/2020|2020-04-21':3.4E-5,'Denmark/ALAB-HH-266/2020|2020-05-09':1.04E-4,'Greece/12/2020|2020-03-18':3.4E-5,'Peru/010/2020|2020-03-10':6.8E-5,'England/CAMB-1B50BE/2020|2020-06-19':1.7E-4,'Switzerland/130015/2020|2020-05-07':3.4E-5,'Italy/BG-7158-24Feb/2020|2020-02-24':0.0,'Austria/CeMM0247/2020|2020-03-21':1.02E-4,'England/20130071804/2020|2020-02-23':0.0,'Poland/Sla2/2020|2020-05-05':0.0,'Poland/Sla9/2020|2020-05-05':0.0,'England/20109097703/2020|2020-03-08':3.6E-5,'Germany/BAV-MVP0184/2020|2020-04-13':0.0,'Greece/34_36284/2020|2020-03-24':0.0,'Sweden/20-51618/2020|2020-05-20':6.8E-5,'Austria/CeMM0364/2020|2020-04-05':1.36E-4,'England/LCST-24D7026/2020|2020-06-17':6.8E-5,'Austria/CeMM0360/2020|2020-04-05':6.8E-5,'Ghana/2914_S8/2020|2020-03-30':3.4E-5,'Germany/NRW-13/2020|2020-03-11':3.4E-5,'Wales/PHWC-165448/2020|2020-06-10':1.7E-4,'SouthAfrica/KRISP-107/2020|2020-05-04':1.54E-4,'Romania/284489/2020|2020-05-14':1.02E-4,'Germany/FrankfurtFFM4/2020|2020-03-02':6.8E-5,'England/CAMB-1AC74C/2020|2020-04-23':6.8E-5,'Netherlands/Gelderland_49/2020|2020-05-16':2.04E-4,'Switzerland/120070/2020|2020-04-20':6.8E-5,'South_Africa/KRISP-0139/2020|2020-05-16':7.9E-5,'South_Africa/KRISP-0133/2020|2020-05-13':9.8E-5,'Bosnia_and_Herzegovina/01-Livno/2020|2020-05-27':1.36E-4,'Austria/CeMM0171/2020|2020-03-07':3.4E-5,'Bangladesh/BCSIR-NILMRC_086/2020|2020-06-01':1.7E-4,'England/HECH-259A097/2020|2020-05-18':3.4E-5,'Bangladesh/BCSIR-NILMRC_078/2020|2020-06-01':1.7E-4,'Cyprus/008/2020|2020-04-27':6.8E-5,'Sweden/20-51758/2020|2020-05-27':2.04E-4,'Sweden/20-19192/2020|2020-05-28':2.04E-4,'Scotland/EDB3857/2020|2020-04-30':1.7E-4,'Latvia/022/2020|2020-04-28':1.31E-4,'England/LIVE-A0C2C/2020|2020-06-15':2.33E-4,'Belgium/ULG-10151/2020|2020-04-18':6.8E-5,'Poland/IHG_PAS_3_57/2020|2020-05-13':2.04E-4,'Wales/PHWC-165220/2020|2020-06-09':6.8E-5,'India/ILSCV20557/2020|2020-05-15':1.02E-4,'Colombia/INS-103303/2020|2020-04-26':1.02E-4,'Switzerland/100070/2020|2020-03-12':3.4E-5,'New_Zealand/20VR3004/2020|2020-04-25':3.4E-5,'Switzerland/130026/2020|2020-05-12':1.36E-4,'Ecuador/HGSQ-USFQ-018/2020|2020-03-30':1.03E-4,'Chile/Copiapo-00006/2020|2020-04-29':6.9E-5,'Spain/Donostia-San_Sebastian2110/2020|2020-04-11':3.4E-5,'Jordan/SR-055/2020|2020-04-02':3.4E-5,'Wales/PHWC-162BFB/2020|2020-05-27':6.8E-5,'Portugal/PT0556/2020|2020-04-20':1.02E-4,'Sweden/20-51311/2020|2020-05-07':1.02E-4,'England/LCST-24D7017/2020|2020-06-17':2.28E-4,'Poland/PL_P20/2020|2020-04-07':3.4E-5,'South_Africa/KRISP-0165/2020|2020-05-29':6.8E-5,'SouthAfrica/Tygerberg_42/2020|2020-04-08':2.38E-4,'England/NOTT-112037/2020|2020-06-16':2.38E-4,'Sweden/20-51350/2020|2020-05-11':6.8E-5,'Poland/Sla3/2020|2020-05-05':4.0E-5,'Sweden/20-51474/2020|2020-05-14':1.02E-4,'Nigeria/Lagos01/2020|2020-02-27':4.2E-5,'England/PHEC-20FFE/2020|2020-02-16':1.02E-4,('Germany/BAV-MVP0221/2020|2020-04-22':3.5E-5,'Belgium/030959/2020|2020-03-09':0.0):3.4E-5,('Brazil/SP-606/2020|2020-04-10':6.8E-5,'Brazil/RJ-1719/2020|2020-04-06':1.7E-4):3.4E-5,('England/LCST-24D6FEE/2020|2020-06-16':0.0,'England/LCST-24D6FB1/2020|2020-06-15':0.0):3.4E-5,('Sweden/20-51891/2020|2020-06-03':1.36E-4,'Sweden/20-14827/2020|2020-05-19':1.02E-4):6.8E-5,('Russia/StPetersburg-RII4728S/2020|2020-04-07':0.0,'Russia/StPetersburg-RII6840S/2020|2020-04-15':3.4E-5):3.4E-5,('Scotland/EDB6535/2020|2020-06-17':3.4E-5,'Scotland/EDB6517/2020|2020-06-15':6.8E-5):6.8E-5,('Germany/BAV-MVP0283/2020|2020-05-11':3.4E-5,'Taiwan/78/2020|2020-03-16':0.0):3.0E-5,('Cyprus/002/2020|2020-03-22':0.0,'Cyprus/004/2020|2020-03-23':0.0):1.02E-4,('Japan/Donner34/2020|2020-05-07':6.8E-5,'Japan/Donner37/2020|2020-05-14':0.0):1.02E-4,('India/NIV-9314/2020|2020-04-13':3.75E-4,'Denmark/ALAB-SSI-1393/2020|2020-04-05':0.0):3.4E-5,('South_Africa/KRISP-0129/2020|2020-05-13':3.4E-5,'South_Africa/KRISP-0125/2020|2020-05-13':0.0):1.02E-4,('Beijing/IVDC-02-06/2020|2020-06-11':0.0,'Beijing/IVDC-01-06/2020|2020-06-11':3.4E-5):3.4E-5,('England/CAMB-1B4C8E/2020|2020-06-14':0.0,'England/CAMB-1B45B0/2020|2020-06-02':0.0):8.9E-5,('Czech_Republic/ChVir1912/2020|2020-03-05':0.0,('Brazil/RJ-2044/2020|2020-04-15':0.0,'Argentina/PAIS_A001/2020|2020-03-01':3.4E-5):3.4E-5):3.4E-5,('Ecuador/USFQ-045/2020|2020-04-17':6.8E-5,('England/LCST-24D6C05/2020|2020-06-09':1.36E-4,'England/LCST-24D6FC0/2020|2020-06-16':6.8E-5):3.4E-5):3.4E-5,('Latvia/014/2020|2020-03-22':6.8E-5,'Poland/IHG_PAS_1_69/2020|2020-04-11':1.02E-4,'England/NOTT-1118F4/2020|2020-05-28':2.72E-4):3.4E-5,('South_Africa/KRISP-0143/2020|2020-05-21':3.4E-5,('South_Africa/KRISP-0157/2020|2020-05-25':0.0,'South_Africa/KRISP-0170/2020|2020-05-31':0.0):1.02E-4):3.4E-5,('Gambia/GC19-015/2020|2020-03-17':0.0,'Scotland/EDB2092/2020|2020-04-19':2.9E-5,'India/NGC-CDFD-32/2020|2020-05-30':1.02E-4):6.8E-5,('Romania/Buzau-291946/2020|2020-06-01':1.36E-4,('Romania/Buzau-293197/2020|2020-06-03':0.0,'Romania/Buzau-292711/2020|2020-06-03':6.8E-5):6.8E-5):6.8E-5,('Ecuador/USFQ-106/2020|2020-05-19':0.0,'Ecuador/USFQ-112/2020|2020-05-19':0.0,'Ecuador/USFQ-707/2020|2020-06-04':0.0):6.8E-5,('England/SHEF-C317F/2020|2020-06-14':0.0,'England/SHEF-CB168/2020|2020-06-16':0.0,'England/SHEF-D0537/2020|2020-06-14':6.8E-5,'England/SHEF-C66F5/2020|2020-06-15':1.59E-4):6.8E-5,('Gambia/1264/2020|2020-05-07':0.0,'Portugal/PT0007/2020|2020-03-07':0.0,'England/CAMB-1AC5E8/2020|2020-04-23':1.7E-4,'Gambia/0548/2020|2020-04-30':2.4E-5,('Gambia/0536/2020|2020-04-30':0.0,'Gambia/1094/2020|2020-05-04':0.0,'Gambia/0528/2020|2020-04-30':0.0,'Gambia/1251/2020|2020-05-07':0.0):3.4E-5):3.4E-5,('England/LCST-24D7035/2020|2020-06-17':6.8E-5,('Oman/205033010/2020|2020-05-01':0.0,'Oman/205033391/2020|2020-05-03':0.0):6.8E-5,('England/LCST-24D7114/2020|2020-06-14':3.4E-5,('England/LCST-24D6CF6/2020|2020-06-10':7.0E-5,'England/LCST-24D6FFD/2020|2020-06-16':3.4E-5):1.02E-4):6.8E-5,('Serbia/KV26-04/2020|2020-04-04':0.0,'Serbia/NP363-04/2020|2020-04-04':0.0,'Serbia/KV26/2020|2020-04-13':0.0,'Serbia/CA3089-04/2020|2020-04-25':0.0):1.02E-4):3.4E-5,('Colombia/Bogota78390/2020|2020-03-06':0.0,'Turkey/IMU-SP-01/2020|2020-04-15':0.0,'Romania/Bucuresti-4105/2020|2020-03-21':0.0,'Romania/Valcea/2020|2020-06-07':2.04E-4,'Latvia/024/2020|2020-04-19':2.04E-4,'Romania/278406/2020|2020-04-30':1.36E-4,('Russia/Moscow_PMVL-3/2020|2020-05-05':6.8E-5,'Russia/Moscow_PMVL-5/2020|2020-05-05':0.0):3.4E-5,('Wales/PHWC-162E01/2020|2020-05-20':6.8E-5,('Wales/PHWC-162645/2020|2020-05-27':0.0,'Wales/PHWC-16476E/2020|2020-06-10':3.4E-5):1.02E-4):2.04E-4):2.9E-5,('Russia/Moscow-67609/2020|2020-03-16':0.0,'Hungary/SRC-00055/2020|2020-03-20':0.0,'Israel/13075882/2020|2020-03-30':0.0,'Switzerland/130020/2020|2020-05-08':3.4E-5,'Japan/Donner27/2020|2020-04-24':6.8E-5,'Argentina/PAIS_A027/2020|2020-04-19':1.71E-4,'Thailand/Bangkok-0066/2020|2020-03-29':6.9E-5,'Japan/Donner36/2020|2020-05-11':1.02E-4,'Switzerland/120230/2020|2020-05-01':3.4E-5,'Canada/ON-UHTC_0074/2020|2020-04-24':6.8E-5,'Morocco/15N/2020|2020-05-15':2.72E-4,'Germany/BAV-MVP0281/2020|2020-05-07':6.8E-5,('India/NIV-12019/2020|2020-04-20':6.8E-5,'India/ILSCV15552/2020|2020-05-11':2.04E-4):3.4E-5,('Japan/Donner32/2020|2020-05-03':3.4E-5,'Japan/Donner6/2020|2020-04-06':3.4E-5):3.4E-5):3.4E-5,('Bangladesh/BCSIR-NILMRC_064/2020|2020-05-31':6.8E-5,'Bangladesh/BCSIR-NILMRC_076/2020|2020-06-01':0.0,'Bangladesh/CHRF_0008/2020|2020-05-16':1.02E-4,'Bangladesh/icddrb-2083/2020|2020-06-07':1.36E-4,'Bangladesh/CHRF_0003/2020|2020-04-17':6.8E-5,'Bangladesh/BCSIR-NILMRC_077/2020|2020-06-01':1.02E-4,'Bangladesh/BCSIR-NILMRC_057/2020|2020-05-10':1.36E-4,'Bangladesh/BCSIR-NILMRC_072/2020|2020-05-26':1.36E-4,'Bangladesh/BCSIR-NILMRC_090/2020|2020-06-02':1.02E-4,'Bangladesh/BCSIR-NILMRC_083/2020|2020-06-01':2.72E-4,'Bangladesh/BCSIR-NILMRC_094/2020|2020-05-23':6.8E-5,'Bangladesh/BCSIR_NILMRC_008/2020|2020-05-21':1.02E-4,('Bangladesh/BCSIR-NILMRC_074/2020|2020-06-01':0.0,'Bangladesh/BCSIR-NILMRC_075/2020|2020-06-01':0.0):6.8E-5,('Bangladesh/DU_50758/2020|2020-05-06':3.4E-5,'Bangladesh/DU_CARS_5586/2020|2020-05-13':0.0):1.7E-4,('Bangladesh/CHRF_0004/2020|2020-04-17':6.8E-5,'Bangladesh/BCSIR-NILMRC_095/2020|2020-05-23':6.8E-5,'Bangladesh/BCSIR-NILMRC_050/2020|2020-05-21':1.36E-4,('Bangladesh/BCSIR-NILMRC_054/2020|2020-06-01':3.4E-5,'Bangladesh/BCSIR-NILMRC_051/2020|2020-05-07':0.0):3.4E-5):3.4E-5):3.4E-5,('England/LIVE-A0C95/2020|2020-06-10':2.72E-4,('England/LCST-24D6B26/2020|2020-06-07':1.02E-4,'England/BIRM-61331/2020|2020-06-13':1.36E-4,('England/LIVE-A0318/2020|2020-05-23':0.0,'England/LIVE-9FF81/2020|2020-06-08':0.0):1.36E-4,('England/BRIS-12DB0B/2020|2020-05-31':6.8E-5,'England/BRIS-12DDD8/2020|2020-06-01':1.91E-4):6.2E-5,('England/CAMB-1B4F94/2020|2020-06-18':0.0,'England/CAMB-1B4F49/2020|2020-06-18':0.0,'England/CAMB-1B4ADF/2020|2020-06-10':3.4E-5,'England/CAMB-1B4FC1/2020|2020-06-18':6.8E-5,'England/CAMB-1B4F1C/2020|2020-06-18':0.0):2.04E-4):3.4E-5,('Uruguay/UY-NYUMC861/2020|2020-03-25':0.0,'Portugal/PT0608/2020|2020-03-14':3.4E-5,'Argentina/PAIS_A021/2020|2020-04-11':1.01E-4,'Chile/Santiago_78/2020|2020-04-04':2.9E-5,'DRC/1376/2020|2020-04-07':3.5E-5,'England/CAMB-1B3ED4/2020|2020-06-08':1.36E-4,'Poland/Pom6/2020|2020-04-23':1.02E-4,'England/CAMB-1B5036/2020|2020-06-21':6.8E-5,('Poland/Pom8/2020|2020-04-27':3.4E-5,'Poland/Pom9/2020|2020-04-27':0.0):3.4E-5,('England/LCST-24D7008/2020|2020-06-17':0.0,'England/LCST-24D6E0F/2020|2020-06-11':0.0,'England/LCST-24D7141/2020|2020-06-15':0.0):1.7E-4,('England/SHEF-C1399/2020|2020-06-15':0.0,'England/SHEF-C8FCB/2020|2020-06-07':0.0,'England/SHEF-CD9E6/2020|2020-06-13':3.4E-5,'England/SHEF-CCD18/2020|2020-06-11':0.0,'England/SHEF-D0CE7/2020|2020-06-14':0.0,'England/SHEF-C31D9/2020|2020-06-15':3.4E-5):6.8E-5):6.8E-5):6.8E-5);
+end;
+
+begin figtree;
+	set appearance.backgroundColorAttribute="Default";
+	set appearance.backgroundColour=#ffffff;
+	set appearance.branchColorAttribute="User selection";
+	set appearance.branchColorGradient=false;
+	set appearance.branchLineWidth=1.0;
+	set appearance.branchMinLineWidth=0.0;
+	set appearance.branchWidthAttribute="Fixed";
+	set appearance.foregroundColour=#000000;
+	set appearance.hilightingGradient=false;
+	set appearance.selectionColour=#2d3680;
+	set branchLabels.colorAttribute="User selection";
+	set branchLabels.displayAttribute="Branch times";
+	set branchLabels.fontName=".AppleSystemUIFont";
+	set branchLabels.fontSize=8;
+	set branchLabels.fontStyle=0;
+	set branchLabels.isShown=false;
+	set branchLabels.significantDigits=4;
+	set layout.expansion=0;
+	set layout.layoutType="RECTILINEAR";
+	set layout.zoom=0;
+	set legend.attribute=null;
+	set legend.fontSize=10.0;
+	set legend.isShown=false;
+	set legend.significantDigits=4;
+	set nodeBars.barWidth=4.0;
+	set nodeBars.displayAttribute=null;
+	set nodeBars.isShown=false;
+	set nodeLabels.colorAttribute="User selection";
+	set nodeLabels.displayAttribute="Node ages";
+	set nodeLabels.fontName=".AppleSystemUIFont";
+	set nodeLabels.fontSize=8;
+	set nodeLabels.fontStyle=0;
+	set nodeLabels.isShown=false;
+	set nodeLabels.significantDigits=4;
+	set nodeShapeExternal.colourAttribute="User selection";
+	set nodeShapeExternal.isShown=false;
+	set nodeShapeExternal.minSize=10.0;
+	set nodeShapeExternal.scaleType=Width;
+	set nodeShapeExternal.shapeType=Circle;
+	set nodeShapeExternal.size=4.0;
+	set nodeShapeExternal.sizeAttribute="Fixed";
+	set nodeShapeInternal.colourAttribute="User selection";
+	set nodeShapeInternal.isShown=false;
+	set nodeShapeInternal.minSize=10.0;
+	set nodeShapeInternal.scaleType=Width;
+	set nodeShapeInternal.shapeType=Circle;
+	set nodeShapeInternal.size=4.0;
+	set nodeShapeInternal.sizeAttribute="Fixed";
+	set polarLayout.alignTipLabels=false;
+	set polarLayout.angularRange=0;
+	set polarLayout.rootAngle=0;
+	set polarLayout.rootLength=100;
+	set polarLayout.showRoot=true;
+	set radialLayout.spread=0.0;
+	set rectilinearLayout.alignTipLabels=false;
+	set rectilinearLayout.curvature=0;
+	set rectilinearLayout.rootLength=100;
+	set scale.offsetAge=0.0;
+	set scale.rootAge=1.0;
+	set scale.scaleFactor=1.0;
+	set scale.scaleRoot=false;
+	set scaleAxis.automaticScale=true;
+	set scaleAxis.fontSize=8.0;
+	set scaleAxis.isShown=false;
+	set scaleAxis.lineWidth=1.0;
+	set scaleAxis.majorTicks=1.0;
+	set scaleAxis.minorTicks=0.5;
+	set scaleAxis.origin=0.0;
+	set scaleAxis.reverseAxis=false;
+	set scaleAxis.showGrid=true;
+	set scaleBar.automaticScale=true;
+	set scaleBar.fontSize=10.0;
+	set scaleBar.isShown=true;
+	set scaleBar.lineWidth=1.0;
+	set scaleBar.scaleRange=0.0;
+	set tipLabels.colorAttribute="User selection";
+	set tipLabels.displayAttribute="Names";
+	set tipLabels.fontName="Helvetica Neue";
+	set tipLabels.fontSize=12;
+	set tipLabels.fontStyle=0;
+	set tipLabels.isShown=true;
+	set tipLabels.significantDigits=4;
+	set trees.order=false;
+	set trees.orderType="increasing";
+	set trees.rooting=false;
+	set trees.rootingType="User Selection";
+	set trees.transform=false;
+	set trees.transformType="cladogram";
+end;
+

@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- <title>Title</title> -->
+    <script src="/assets/talks/assets/js/d3.v7.min.js"></script>
+    <script src="/assets/talks/assets/js/constants.js"></script>
+    <link rel="stylesheet" href="/assets/talks/assets/css/figure.css" />
+  </head>
+  <body>
+    <div class="figure-div" id="fig"></div>
+    <!--<style>-->
+    <!--    .external-node .node-shape{-->
+    <!--        fill:none-->
+    <!--    }-->
+    <!--    .internal-node .node-shape{-->
+    <!--        fill:none-->
+    <!--    }-->
+    <!--</style>-->
+    <script type="module">
+      import {
+        Tree,
+        FigTree,
+        roughBranch,
+        roughCircle,
+        Type,
+        axisBars,
+        circle,
+        branch,
+        tipLabel,
+        rectangularLayout,
+        levelLayout,
+      } from "/assets/talks/assets/js/figtree.esm.fbf619.js";
+      const svgSelection = d3
+        .select("#fig")
+        .append("svg")
+        .attr("class", "tree")
+        .attr("id", "figtree")
+        .attr("width", width)
+        .attr("height", height);
+
+      const margins = { top: 20, bottom: 20, left: 30, right: 30 };
+      // const tree_string="(case4:0.005,(case96:0.005,case104:0.005):0.005,(case20:0.005,((((case189:0.005):0.005):0.005):0.005):0.005,((case166:0.005):0.005,(case213:0.005):0.005):0.005):0.005,((((case18:0.005,(case26:0.005):0.005,case38:0.005,case48:0.005):0.005,(((case202:0.005,(case256:0.005):0.005):0.005):0.005,((case170:0.005):0.005,(case108:0.005,case116:0.005,(case210:0.005,case222:0.005,case262:0.005):0.005):0.005):0.005,((case24:0.005,(case68:0.005,case98:0.005,(case59:0.005,case73:0.005,case81:0.005):0.005):0.005,((case113:0.005):0.005,(case52:0.005,case121:0.005,case233:0.005):0.005,(((case165:0.005):0.005,(case208:0.005,case244:0.005):0.005,(((case258:0.005):0.005,(((case269:0.005):0.005):0.005,case211:0.005,(case257:0.005):0.005):0.005):0.005):0.005):0.005):0.005):0.005):0.005):0.005):0.005):0.005):0.005):0.005,(((case77:0.005,case255:0.005):0.005,((((case120:0.005):0.005,case82:0.005,case110:0.005,(case223:0.005):0.005,case174:0.005,((case179:0.005,case225:0.005):0.005):0.005):0.005,((case234:0.005):0.005,(((case122:0.005):0.005,(case216:0.005):0.005,(case176:0.005):0.005,((case215:0.005):0.005):0.005,case117:0.005,case187:0.005,((case265:0.005):0.005,case186:0.005):0.005):0.005):0.005):0.005):0.005):0.005,(case31:0.005,(((case252:0.005):0.005,case227:0.005):0.005):0.005,((case141:0.005):0.005,((case128:0.005):0.005):0.005,case57:0.005,case64:0.005,case65:0.005,case67:0.005,((((case214:0.005):0.005):0.005):0.005):0.005,case236:0.005,(case178:0.005,((case205:0.005):0.005,case219:0.005):0.005):0.005,((case250:0.005):0.005,(case85:0.005,case118:0.005,(case221:0.005):0.005,case238:0.005):0.005):0.005,(((case84:0.005,((case175:0.005):0.005,case124:0.005,case184:0.005,case197:0.005):0.005,(case146:0.005,case167:0.005,case198:0.005,case271:0.005):0.005):0.005):0.005):0.005):0.005):0.005):0.005):0.005,(((case35:0.005,(((case134:0.005):0.005,((case228:0.005):0.005,((case127:0.005):0.005,case207:0.005):0.005):0.005):0.005,((((case194:0.005):0.005):0.005,(case229:0.005):0.005,(((case248:0.005):0.005):0.005,(case232:0.005):0.005):0.005,(case151:0.005,(case273:0.005):0.005,case196:0.005,case230:0.005,case264:0.005):0.005):0.005):0.005):0.005):0.005):0.005,(case13:0.005,(case40:0.005,(case267:0.005):0.005,((case193:0.005):0.005):0.005,((case111:0.005):0.005,(case131:0.005,case160:0.005,(case158:0.005,case260:0.005):0.005,(case45:0.005,(case92:0.005):0.005,(case168:0.005):0.005,(case106:0.005,(case218:0.005,((case204:0.005):0.005,(case263:0.005):0.005):0.005):0.005):0.005,(((case266:0.005):0.005):0.005,case247:0.005,(((case270:0.005):0.005):0.005,case217:0.005):0.005):0.005,(case180:0.005,case231:0.005,(case125:0.005,case200:0.005,case224:0.005,((case239:0.005,case240:0.005):0.005):0.005,(case246:0.005,case253:0.005):0.005,((case192:0.005):0.005,case259:0.005,((case242:0.005,case249:0.005):0.005):0.005,(case237:0.005,case254:0.005,case268:0.005,case272:0.005):0.005):0.005):0.005):0.005):0.005):0.005):0.005):0.005):0.005):0.005);"
+      const tree_string =
+        "((A175:0.005,(A215:0.005,A265:0.005):0.005):0.005,((A204:0.005,A263:0.005):0.005,A270:0.005,(((A237:0.005,A254:0.005,A268:0.005,A272:0.005,(A400:0.005,A401:0.005,A402:0.005,A404:0.005,(A505:0.005):0.005):0.005):0.005,A192:0.005,(A242:0.005,A249:0.005):0.005):0.005,(A239:0.005,A240:0.005):0.005):0.005):0.005,((A208:0.005,A244:0.005):0.005,A165:0.005,((A211:0.005,A269:0.005,A257:0.005):0.005,A258:0.005):0.005):0.005);";
+      const tree = Tree.parseNewick(tree_string);
+
+      const sampled = [
+        tree.root,
+        ...tree.nodes.filter((n) => Math.random() < 0.5),
+      ];
+
+      const layout =
+        (level = 2) =>
+        (figtree) => {
+          figtree.tree().nodes.forEach((n) => {
+            if (n.level > level) {
+              figtree.ignoreAndHide(n, false);
+            } else if (n.level === level) {
+              figtree.hide(n, false);
+            } else {
+              if (!n.annotations.hidden) {
+                figtree.reveal(n, false);
+              }
+            }
+          });
+
+          let currentY = 0;
+
+          const id = figtree.id;
+          const tree = figtree.tree();
+
+          const traverse = function (node, siblingPositions = []) {
+            const myChildrenPositions = [];
+            if (!node[id]) {
+              console.log(node);
+            }
+            if (!node[id].ignore) {
+              let yPos;
+              if (
+                node.children &&
+                node.children.reduce(
+                  (acc, curr) => acc && !curr[id].ignore,
+                  true
+                )
+              ) {
+                if (node[id].collapsed) {
+                  yPos = currentY += 1;
+                } else {
+                  for (const child of node.children) {
+                    traverse(child, myChildrenPositions);
+                  }
+                  yPos = d3.mean(myChildrenPositions);
+                }
+              } else {
+                yPos = currentY += 1;
+                siblingPositions.push(currentY);
+              }
+
+              siblingPositions.push(yPos);
+
+              const leftLabel = !!node.children;
+              const labelBelow =
+                !!node.children &&
+                (!node.parent || node.parent.children[0] !== node);
+
+              node[id].x = node.divergence;
+              node[id].y = yPos;
+              node[id].classes = getClassesFromNode(node);
+              // node[id].classes = [];
+
+              node[id].textLabel = {
+                labelBelow,
+                x: leftLabel ? "-6" : "12",
+                y: leftLabel ? (labelBelow ? "-8" : "8") : "0",
+                alignmentBaseline: leftLabel
+                  ? labelBelow
+                    ? "bottom"
+                    : "hanging"
+                  : "middle",
+                textAnchor: leftLabel ? "end" : "start",
+              };
+            }
+          };
+
+          traverse(tree.root);
+        };
+
+      const colorScale = d3
+        .scaleOrdinal(d3.schemeTableau10)
+        .domain(["1", "2", "3"]);
+      tree.nodes.forEach((n) => {
+        tree.annotateNode(n, { location: "1" });
+      });
+
+
+      const rootedFigTree = new FigTree(
+        document.getElementById("figtree"),
+        margins,
+        tree
+      )
+        // .layout(layout(1))
+        .layout(levelLayout)
+        // .layout(rectangularLayout)
+        .nodes(
+          roughCircle()
+            .filter((n) => !n.annotations.hover && !n.annotations.hidden)
+            .radius(20)
+            .fillAttr("stroke", (n) => colorScale(n.annotations.location))
+            .fillAttr("stroke-width", 2)
+            .strokeAttr("stroke", "black")
+            .strokeAttr("stroke-width", 3),
+          roughCircle()
+            .filter((n) => n.annotations.hover && !n.annotations.hidden)
+            .radius(30)
+            .fillAttr("stroke", (n) => colorScale(n.annotations.location))
+            .fillAttr("stroke-width", 3)
+            .strokeAttr("stroke", "black")
+            .strokeAttr("stroke-width", 4)
+        )
+        .nodeBackgrounds(
+          circle()
+            .attr("r", (n) => (n.annotations.hover ? 30 : 20))
+            .attr("fill", "white")
+            .annotateOnHover("hover")
+        )
+
+        .branches(
+          roughBranch()
+            .curve(d3.curveNatural)
+            .attr("stoke-width", 2)
+            .attr("stroke", (d) => (d.annotations.shown ? "black" : "white"))
+          // .attr("class","hidden")
+        );
+
+      // .feature(
+      //     axis()
+      //         .origin(2020)
+      //         .y(height-margins.top-margins.bottom+30)
+      //         .tickFormat(customFormat("%b-%d"))
+      // );
+      // rootedFigTree.layout(rectangularLayout)
+
+      window._transitions = [
+
+      {
+          transitionForward: () => {
+            tree.nodeList.forEach((n) => {
+              tree.annotateNode(n, { shown: "true" });
+            });
+            // rootedFigTree.layout(rectangularLayout)
+
+            rootedFigTree.update();
+          },
+          transitionBackward: () => {
+            // rootedFigTree.layout(levelLayout)
+            tree.nodeList.forEach((n) => {
+              tree.annotateNode(n, { shown: "false" });
+            });
+            rootedFigTree.update();
+          },
+        },
+        {
+          transitionForward: () => {
+            let i = 1;
+            tree.nodes
+              .filter((n) => n.level === 2)
+              .forEach((n) => {
+                tree.annotateNode(n, { location: `${i}` });
+                [...tree.postorder(n)].forEach((d) => {
+                  tree.annotateNode(d, { location: `${i}` });
+                });
+                i += 1;
+              });
+            rootedFigTree.update();
+          },
+          transitionBackward: () => {
+            tree.nodes.forEach((n) => {
+              tree.annotateNode(n, { location: "1" });
+            });
+            rootedFigTree.update();
+          },
+        },
+
+      
+        {
+          transitionForward: () => {
+            rootedFigTree.layout(rectangularLayout);
+          },
+          transitionBackward: () => {
+            rootedFigTree.layout(levelLayout);
+          },
+        },
+        {
+          transitionForward: () => {
+            rootedFigTree.layout(levelLayout);
+          },
+          transitionBackward: () => {
+            rootedFigTree.layout(rectangularLayout);
+          },
+        },
+
+        // {
+        //     transitionForward:()=> {
+        //         tree.nodes.forEach(n => {
+        //             if (sampled.indexOf(n)===-1) {
+        //                 tree.annotateNode(n,{"hidden":true});
+        //             }
+        //         })
+        //         // tree.nodes.forEach(n => {
+        //         //     tree.annotateNode(n, {"location": "1"})
+        //         // })
+        //         // rootedFigTree.update();
+        //         // rootedFigTree.svgSelection.selectAll(".branch path")
+        //         //     .classed("hidden", true);
+        //     },
+        //     transitionBackward:()=>{
+        //         d3.svgSelection.selectAll(".branch path")
+        //             .classed("hidden", false);
+        //         tree.nodes.forEach(n => {
+        //             if (sampled.indexOf(n)===-1) {
+        //                 tree.annotateNode(n,{"hidden":false});
+        //             }
+        //         })
+        //         rootedFigTree.update();
+        //     }
+        // }
+      ];
+      function getClassesFromNode(node) {
+        let classes = [!node.children ? "external-node" : "internal-node"];
+        const tree = node.tree;
+        if (node.annotations) {
+          classes = [
+            ...classes,
+            ...Object.entries(node.annotations)
+              .filter(([key]) => {
+                return (
+                  tree.annotations[key] &&
+                  (tree.annotations[key].type === Type.DISCRETE ||
+                    tree.annotations[key].type === Type.BOOLEAN ||
+                    tree.annotations[key].type === Type.INTEGER)
+                );
+              })
+              .map(([key, value]) => {
+                if (
+                  tree.annotations[key].type === Type.DISCRETE ||
+                  tree.annotations[key].type === Type.INTEGER
+                ) {
+                  return `${key}-${value}`;
+                } else if (
+                  tree.annotations[key].type === Type.BOOLEAN &&
+                  value
+                ) {
+                  return `${key}`;
+                }
+              }),
+          ];
+        }
+        return classes;
+      }
+    </script>
+  </body>
+</html>

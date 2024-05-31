@@ -1,0 +1,22 @@
+.figure-div{
+    text-align:center;
+    width: 100%;
+    height: 100%;
+}
+.axis text {
+    font-family: "helvetica-neue",  "helvetica",  "sans-serif";
+    font-size: 12pt;
+    font-weight: 300;
+}
+
+.axis-label text {
+    font-family: "helvetica-neue",  "helvetica",  "sans-serif";
+    font-size: 12pt;
+    font-weight: bold;
+}
+text {
+    font-family: "helvetica-neue",  "helvetica",  "sans-serif";
+    font-size: 12pt;
+    /*font-weight: bold;*/
+}
+

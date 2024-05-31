@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- <title>Title</title> -->
+    <script src="/assets/talks/assets/js/d3.v7.min.js"></script>
+
+    <script src="/assets/talks/assets/js/topojson@3"></script>
+
+    <script src="/assets/talks/assets/js/d3-geo@3"></script>
+    <script src="/assets/talks/assets/js/d3-geo-projection@4"></script>
+
+    <script src="/assets/talks/assets/js/legend.js"></script>
+    <script src="/assets/talks/assets/js/constants.js"></script>
+    <script src="/assets/talks/assets/js/datFormat.js"></script>
+    <link rel="stylesheet" href="/assets/talks/assets/css/figure.css" />
+  </head>
+  <body>
+    <div class="figure-div" id="fig"></div>
+    <script type="module">
+      import {
+        Tree,
+        FigTree,
+        circle,
+        axis,
+        axisBars,
+        branchLabel,
+        branch,
+        tipLabel,
+        textAnnotation,
+        rectangularLayout,
+      } from "/assets/talks/assets/js/figtree.esm.27e9.js";
+
+      const svgSelection = d3
+        .select("#fig")
+        .append("svg")
+        .attr("class", "tree")
+        .attr("id", "rtt")
+        .attr("width", width)
+        .attr("height", height);
+
+      const treeMargins = { top: 30, bottom: 60, left: 50, right: 150 };
+      const lineMargins = { top: 30, bottom: 60, left: 50, right: 50 };
+      const margins = { top: 30, bottom: 60, left: 50, right: 170 };;
+      let tree, mcc;
+      let removeExpectations;
+      const firstTree = fetch("data/sdevo-17.metadata.mcc.tree").then((d) =>
+        d.text()
+      );
+      const lineages = fetch("data/sdevo-17.grouped.traj.tsv").then((d) =>
+        d.text()
+      );
+
+      let addLines;
+      Promise.all([firstTree, lineages]).then((d) => {
+        const [firstTreeText, lineagesText] = d;
+        tree = Tree.parseNexus(firstTreeText, {
+          datePrefix: "|",
+          dateFormat: "%Y-%m-%d",
+        })[0];
+
+        // tree.reroot(tree.getExternalNode("KR063671|Yambuku-Mayinga|DRC|1976-10-01").parent,0.97) //R2 0.844
+        // console.log(tree)
+
+        tree.orderByNodeDensity(false);
+        // tree.externalNodes.filter(n => n.annotations.date > 2014.4).forEach(n=>tree.annotateNode(n,{"special":true}));
+        const cScale = d3
+          .scaleSequential(d3.interpolateBlues)
+          .domain([-0.5, 1]);
+
+        const xAxis = axis()
+          .location("bottom")
+          .y(height - margins.top - margins.bottom + 10)
+          .x(0)
+          .tickFormat((d) => customFormat("%Y")(d + 1)) // the breaks are at dec 31 so plus 1 and year puts at new year
+          .ticks(5)
+          .origin(2022.3014);
+        const bars = axisBars(xAxis);
+        bars._evenFill = "#EDEDED";
+
+        mcc = new FigTree(document.getElementById("rtt"), margins, tree)
+          .layout(rectangularLayout)
+          .nodes(
+            circle()
+              .filter((d) => !d.children)
+              .attr("r", (d) => (d.annotations.hovered ? 5 : 3))
+              .style("fill", (d) => cScale(0))
+              .annotateOnHover("hovered")
+            // tipLabel(d=>d.name.split("|").splice(-2).join(" "))
+          )
+          .nodeBackgrounds(
+            circle()
+              .filter((d) => !d.children)
+              .attr("r", (d) => (d.annotations.hovered ? 7 : 5))
+              .style("fill", cScale(2020))
+          )
+          .branches(
+            branch()
+              .style("stroke", (d) =>
+                d.annotations.time0_median !== null &&
+                d.annotations.time0_median > 0
+                  ? cScale(d.annotations.time0_median)
+                  : cScale(0)
+              )
+              .style("stroke-width", 2)
+            //     branchLabel((d) =>
+            //       d.annotations.time0_median !== null &&
+            //       d.annotations.time0_median > 0.01
+            //         ? `${d3.format("0.2f")(
+            //             d.annotations.time0_median * d.length
+            //           )} (${d3.format("0.0%")(d.annotations.time0_median)})`
+            //         : ""
+            //     )
+          )
+          .feature(xAxis)
+          .feature(bars);
+
+        //lineage plot
+
+        const lineages = d3.tsvParse(lineagesText, d3.autoType).filter(d=>d.age<mcc.scales.x.domain()[1]);//remove points beyond the root
+
+        const xScale = d3
+          .scaleLinear()
+          .domain(mcc.scales.x.domain())
+          .range([width - margins.left - margins.right, 0])
+         ; //reverse cuz age
+
+        const yScale = d3
+          .scaleLinear()
+          .domain([0, d3.max(lineages, (d) => d.upper)])
+          .range([height - margins.top - margins.bottom, 0]); //reverse cuz age
+
+        addLines = ()=>{
+        const lineageG = d3
+          .select("#rtt")
+          .append("g")
+          .attr("transform", `translate(${margins.left},${margins.top})`)
+          .attr("id", "lineage-plot");
+
+
+        
+        lineageG.append("text").text("Replicating Lineages").attr("x", xScale.range()[0]+5).attr("y", yScale(15));   
+        lineageG.append("text").text("Latent Lineages").attr("x", xScale.range()[0]+5).attr("y", yScale(2));   
+
+        lineageG
+          .append("path")
+          .datum(lineages.filter((d) => d.type === 0))
+          .attr("stroke", cScale(1))
+          .attr(
+            "d",
+            d3
+              .area()
+              .x((d) => xScale(d.age))
+              .y0((d) => yScale(d.lower))
+              .y1((d) => yScale(d.upper))
+          )
+          .attr("stroke-width", 2)
+          .attr("fill", cScale(1))
+          .attr("fill-opacity", 0.3);
+
+        lineageG
+          .append("path")
+          .datum(lineages.filter((d) => d.type === 0))
+          .attr("stroke", cScale(1))
+          .attr(
+            "d",
+            d3
+              .line()
+              .x((d) => xScale(d.age))
+              .y((d) => yScale(d.median))
+          )
+          .attr("fill", "none")
+          .attr("stroke-width", 2);
+
+        lineageG
+          .append("path")
+          .datum(lineages.filter((d) => d.type === 1))
+          .attr("stroke", cScale(0))
+          .attr(
+            "d",
+            d3
+              .area()
+              .x((d) => xScale(d.age))
+              .y0((d) => yScale(d.lower))
+              .y1((d) => yScale(d.upper))
+          )
+          .attr("stroke-width", 2)
+          .attr("fill", cScale(0))
+          .attr("fill-opacity", 0.3);
+
+        lineageG
+          .append("path")
+          .datum(lineages.filter((d) => d.type === 1))
+          .attr("stroke", cScale(0))
+          .attr(
+            "d",
+            d3
+              .line()
+              .x((d) => xScale(d.age))
+              .y((d) => yScale(d.median))
+          )
+          .attr("stroke-width", 2)
+          .attr("fill", "none");
+
+        lineageG.append("g")
+        .attr('transform',`translate(${-10},0)`).call(d3.axisLeft(yScale).ticks(5));
+        }
+      });
+
+      window._transitions = [
+        {   transitionForward: () => {addLines()},
+           transitionBackward: () => {d3.select("#lineage-plot").remove()},
+            index: 0 // optional
+        }
+    ]    </script>
+  </body>
+</html>

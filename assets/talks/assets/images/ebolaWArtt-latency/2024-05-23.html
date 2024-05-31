@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- <title>Title</title> -->
+    <script src="/assets/talks/assets/js/d3.v7.min.js"></script>
+    <script src="/assets/talks/assets/js/topojson@3"></script>
+    <script src="/assets/talks/assets/js/d3-geo@3"></script>
+    <script src="/assets/talks/assets/js/d3-geo-projection@4"></script>
+    <script src="/assets/talks/assets/js/legend.js"></script>
+    <script src="/assets/talks/assets/js/constants.js"></script>
+    <script src="/assets/talks/assets/js/datFormat.js"></script>
+     <link rel="stylesheet" href="/assets/talks/assets/css/figure.css" />
+
+
+</head>
+<body>
+<div class="figure-div" id="fig" ></div>
+<script type="module">
+
+
+    import {Tree,FigTree,circle,axis,axisBars,predicatedRootToTipLayout,branch,trendLine,textAnnotation,rectangularLayout} from "/assets/talks/assets/js/figtree.esm.27e9.js";
+
+    const svgSelection = d3.select("#fig")
+        .append("svg")
+        .attr("class","tree")
+        .attr("id","rtt")
+        .attr("width",width)
+        .attr("height",height)
+
+
+    const margins = { top: 10, bottom: 50, left: 150, right: 50};
+
+    let addExpectations;
+    let removeExpectations;
+    fetch("data/Makona_1063_Guinea_2021.12GIN.fasta.rooted.collapsed.tree").then(d=>d.text()).then(
+        treeText => {
+
+            const tree = Tree.parseNewick(treeText,{datePrefix: "|",dateFormat: "%Y-%m-%d"});
+            // tree.reroot(tree.getExternalNode("KR063671|Yambuku-Mayinga|DRC|1976-10-01").parent,0.97) //R2 0.844
+            // console.log(tree)
+
+            tree.orderByNodeDensity(false)
+            // tree.externalNodes.filter(n => n.annotations.date > 2014.4).forEach(n=>tree.annotateNode(n,{"special":true}));
+            const cScale = d3.scaleSequential(d3.interpolateBlues).domain([2014.2,2016.2])
+
+            const xAxis =  axis()
+                .location("bottom")
+                .y(height-margins.top-margins.bottom+5)
+                .x(0)
+                .title({text:"Date of sample",
+                    yPadding:50})
+                .tickFormat(d=>customFormat("%Y")(d+1)) // otherwise lines at dec and get rounded down
+                .ticks(6)
+            // .origin(maxDivergence);
+            const yAxis =  axis()
+                .location("left")
+                .y(0)
+                .x(0)
+                .title({text:"Divergence",
+                    xPadding:-100,
+                    yPadding:10})
+                .tickFormat(d3.format("0.1e"))
+                .ticks(6)
+            const bars = axisBars(xAxis)
+            bars._evenFill="#EDEDED";
+
+
+            const rootToTipPlot = new FigTree(document.getElementById("rtt"),margins,tree)
+                .layout(predicatedRootToTipLayout(d=>d.annotations.date<2021))
+                .nodes(
+                    circle()
+                        .filter(d=>!d.children)
+                        .attr("r",d=>d.annotations.hovered?3:2)
+                        .style("fill",d=>cScale(d.annotations.date))
+                        .annotateOnHover("hovered")
+
+                )
+                .nodeBackgrounds(
+                    circle()
+                        .attr("r",3)
+                        .style("fill",cScale(2020))
+                )
+                .feature(xAxis)
+                .feature(yAxis)
+                .feature(bars)
+                .feature(trendLine()
+                    .attr("stroke-dasharray","5,5")
+                )
+
+                rootToTipPlot.feature(
+          textAnnotation()
+            .text(
+              () => `Rate:${d3.format("0.2e")(rootToTipPlot.regression.slope)}`
+            )
+            .y(40)
+            .x(30)
+        );
+        rootToTipPlot.feature(
+          textAnnotation()
+            .text(
+              () =>
+                `TMRCA:${d3.format("0.0f")(
+                    rootToTipPlot.regression.xIntercept
+                )}`
+            )
+            .y(65)
+            .x(30)
+        );
+        rootToTipPlot.feature(
+          textAnnotation()
+            .text(
+              () => `R^2:${d3.format("0.3f")(rootToTipPlot.regression.rSquare)}`
+            )
+            .y(90)
+            .x(30)
+        );
+
+            addExpectations=()=>{
+                const inverse =(y)=>{
+                    const b= rootToTipPlot.regression.yIntercept;
+                    const m = rootToTipPlot.regression.slope;
+                    return (y-b)/m;
+                }
+
+                const meanAge = d3.mean(tree.nodes.map(n=>n.annotations.date).filter(d=>d>2021));
+                const meanD = d3.mean(tree.nodes.filter(n=>n.annotations.date>2021).map(n=>n.divergence));
+
+                const meanExpectedAge = inverse(meanD);
+                const meanExpectedD = rootToTipPlot.regression.y(meanAge)
+
+
+                const points = [[meanAge,meanExpectedD],[meanExpectedAge,meanD]]
+
+                const lines = [[[meanAge,meanD],[meanAge,meanExpectedD]],[[meanAge,meanD],[meanExpectedAge,meanD]]];
+
+// ADD expected locations
+
+                rootToTipPlot.svgSelection
+                    .select(".top-annotation-layer")
+                    .selectAll(".points")
+                    .data(points)
+                    .enter()
+                    .append("circle")
+                    .attr("class","points")
+                    .attr("r",6)
+                    .attr("fill",cScale(2021))
+                    .attr("stroke","lightgrey")
+                    .attr("opacity",0.8)
+                    .attr("cx",d=> rootToTipPlot.scales.x(d[0]))
+                    .attr("cy",d=>rootToTipPlot.scales.y(d[1]))
+
+                rootToTipPlot.svgSelection
+                    .select(".top-annotation-layer")
+                    .selectAll(".lines")
+                    .data(lines)
+                    .enter()
+                    .append("path")
+                    .attr("class","lines")
+                    .attr("stroke",cScale(2021))
+                    .attr("stroke-width",2)
+                    .attr("stroke-dasharray","7,2")
+                    .attr("d",d3.line()
+                        .x(d=>rootToTipPlot.scales.x(d[0]))
+                        .y(d=>rootToTipPlot.scales.y(d[1]))
+                    )
+            }
+
+
+        removeExpectations = ()=>{
+            rootToTipPlot.svgSelection
+                .select(".top-annotation-layer")
+                .selectAll(".points")
+                .data([])
+                .enter()
+                .append("circle")
+                .attr("class","points")
+                .attr("r",6)
+                .attr("fill",cScale(2021))
+                .attr("stroke","lightgrey")
+                .attr("opacity",0.8)
+                .attr("cx",d=> rootToTipPlot.scales.x(d[0]))
+                .attr("cy",d=>rootToTipPlot.scales.y(d[1]))
+
+            rootToTipPlot.svgSelection
+                .select(".top-annotation-layer")
+                .selectAll(".lines")
+                .data([])
+                .enter()
+                .append("path")
+                .attr("class","lines")
+                .attr("stroke",cScale(2021))
+                .attr("stroke-width",2)
+                .attr("stroke-dasharray","7,2")
+                .attr("d",d3.line()
+                    .x(d=>rootToTipPlot.scales.x(d[0]))
+                    .y(d=>rootToTipPlot.scales.y(d[1]))
+                )
+
+        }
+        });
+
+
+    window._transitions = [
+        {   transitionForward: () => {addExpectations()},
+            transitionBackward: () => removeExpectations(), // optional
+            index: 0 // optional
+        }
+    ]
+
+
+</script>
+</body>
+</html>
