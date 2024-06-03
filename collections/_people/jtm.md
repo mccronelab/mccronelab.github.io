@@ -5,7 +5,7 @@ position: PI
 github: jtmccr1
 # scholar: mztCjxEAAAAJ
 image: /assets/images/team/jt.jpg 
-sort: 1
+order: 0
 ---
 
 I am an Assistant Professor at the Fred Hutch Cancer Center. 

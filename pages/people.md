@@ -4,9 +4,8 @@ permalink: /people/
 title: People
 # toc: true
 ---
-
-
-{% for person in site.people %}
+{% assign sorted_people = site.people | sort: "order" %}
+{% for person in sorted_people %}
 <div class="person">
   <div class="person-photo">
     <!-- <a href="{{person.url}}"> -->
@@ -16,7 +15,7 @@ title: People
   <div class="name">
     {{ person.name }}
   </div>
-  <div class="blerb">
+  <div class="blerb" style="margin-left: 350px;">
     <p>{{ person.content | markdownify }}</p>
   </div>
   <!-- <div class="person-links">
