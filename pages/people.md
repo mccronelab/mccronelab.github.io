@@ -15,7 +15,7 @@ title: People
   <div class="name">
     {{ person.name }}
   </div>
-  <div class="blerb">
+  <div class="blerb" style="margin-left: 350px;">
     <p>{{ person.content | markdownify }}</p>
   </div>
   <!-- <div class="person-links">
