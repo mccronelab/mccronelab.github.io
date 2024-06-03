@@ -4,9 +4,8 @@ permalink: /people/
 title: People
 # toc: true
 ---
-
-
-{% for person in site.people %}
+{% assign sorted_people = site.people | sort: "order" %}
+{% for person in sorted_people %}
 <div class="person">
   <div class="person-photo">
     <!-- <a href="{{person.url}}"> -->

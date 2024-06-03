@@ -5,7 +5,7 @@ position: Bioinformatic Analyst II
 github: connercopeland
 # scholar:
 image: /assets/images/team/ccopeland_photo.jpeg 
-sort: 0
+order: 1
 ---
 
 I am a Bioinformatic Analyst II at Fred Hutchinson Cancer Center, under the BBE program in the Vaccines and Infectious Diseases Division. 
