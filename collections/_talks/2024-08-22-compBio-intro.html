@@ -1,0 +1,115 @@
+---
+layout: talk
+title: Virus evolution within individuals and across continents
+author: JT McCrone
+event: CompBio summer retreat
+location:  Camp Casey, Whidbey Island, Washington
+widescreen: true
+fig-width: 900px
+fig-height: 506px
+published: true
+---
+
+<section>
+    <br />
+    <h2 class="title">{{ page.title }}</h2>
+    <br />
+    <p class="title-personal">
+      JT McCrone
+      <br/>
+      Fred Hutch Cancer Center
+      <br />
+      {{ page.date | date: "%b %d, %Y" }}
+      <br />
+      {{ page.event }}
+      <br />
+      {{ page.location }}
+    </p>
+  </section>
+  
+  
+    <section>
+      <section class="title-slide">
+        <h4>Realtime outbreak investigation</h4>
+      </section>
+      <section>
+        <h5>Phylogenetics reveals underlying transmission process</h5>
+        <div
+          class="fig-container"
+          data-preload
+          data-file="/assets/talks/assets/images/ebola-2018/talkified_figure/ebola-2018.html"
+        ></div>
+      </section>
+    </section>
+  
+    <section>
+      <section class="title-slide">
+        <h4>Phylogenetic methods in pandemic-sized datasets</h4>
+      </section>
+  
+      <section>
+        <h3>Tractable phylogenetics for the pandemic</h3>
+        <div class="row">
+          <div class="row">
+            <div class="col-50">
+              <p>Computational time</p>
+              <img src="/assets/talks/assets/images/thorneyBeast/speed.png" />
+            </div>
+            <div class="col-50">
+              <p>Memory usage</p>
+              <img src="/assets/talks/assets/images/thorneyBeast/memory.png" />
+            </div>
+          </div>
+        </div>
+      </section>
+  
+      <section>
+        <h3>Within-country spread</h3>
+        <div class="row" style="margin-right: 85px">
+          <img
+            height="400px"
+            src="/assets/talks/assets/images/delta/Figure_3.png"
+          />
+        </div>
+        <div class="citation">
+          <p>McCrone <em>et al.</em>, 2022</p>
+        </div>
+      </section>
+    </section>
+    
+    <section>
+      <section class="title-slide">
+        <h4>Virus evolution within and between humans hosts</h4>
+      </section>
+      <section>
+        <h4>RNA virus evolution - Go extinct another day</h4>
+        <div class="row" style="margin-top: 70px">
+          <div class="col-50">
+            <ul style="font-size: 0.5em">
+              <li>Error prone RNA dependent RNA polymerase</li>
+              <li>
+                High mutation rate (~10<sup>-4</sup>) mutations/nucleotide
+                replicated (~1 mutation in every genome)
+              </li>
+              <li>
+                Rapid, adaptive evolution thwarts antiviral drugs, vaccine
+                programs, and prior immunity.
+              </li>
+            </ul>
+          </div>
+          <div class="col-30" style="margin-left: 60px" ;>
+            <img src="/assets/talks/assets/images/bond.jpg" />
+          </div>
+        </div>
+        <div class="citation">
+          <p>Credit: Adam Lauring</p>
+        </div>
+      </section>
+
+      <section>
+        <h4>Each infection is a new roll of the dice</h4>
+        <div class="row" style="margin-top: 100px; margin-right: 85px">
+          <img src="/assets/talks/assets/images/bottleneck.jpg" height="400px" />
+        </div>
+      </section>
+    </section>
