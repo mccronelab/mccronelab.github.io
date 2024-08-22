@@ -3,7 +3,7 @@ layout: talk
 title: Virus evolution within individuals and across continents
 author: JT McCrone
 event: CompBio summer retreat
-location:  Camp Casey, Whidbey Island, Washington
+location: Camp Casey, Whidbey Island, Washington
 widescreen: true
 fig-width: 900px
 fig-height: 506px
@@ -11,105 +11,493 @@ published: true
 ---
 
 <section>
+  <br />
+  <h2 class="title">{{ page.title }}</h2>
+  <br />
+  <p class="title-personal">
+    JT McCrone
     <br />
-    <h2 class="title">{{ page.title }}</h2>
+    Fred Hutch Cancer Center
     <br />
-    <p class="title-personal">
-      JT McCrone
-      <br/>
-      Fred Hutch Cancer Center
-      <br />
-      {{ page.date | date: "%b %d, %Y" }}
-      <br />
-      {{ page.event }}
-      <br />
-      {{ page.location }}
-    </p>
+    {{ page.date | date: "%b %d, %Y" }}
+    <br />
+    {{ page.event }}
+    <br />
+    {{ page.location }}
+  </p>
+</section>
+
+<section>
+  <section class="title-slide">
+    <h4>Realtime outbreak investigation</h4>
+  </section>
+  <section>
+    <h3>2018-2020 North Kivu Ebola virus epidemic</h3>
+    <div>
+      <div class="col-50">
+        <div style="padding-top: 1em">
+          <ul>
+            <li>August 1, 2018 - June 25, 2020</li>
+            <li>Over 3,000 cases</li>
+            <li>351 sequences - August, 2019</li>
+          </ul>
+        </div>
+        <div style="margin-top: 100px">
+          <img
+            src="/assets/talks/assets/images/ebola-2018/nKivu-cases.png"
+            width="900px"
+          />
+        </div>
+      </div>
+      <div class="col-50">
+        <img
+          src="/assets/talks/assets/images/ebola-2018/nKivu.png"
+          width="500px"
+        />
+      </div>
+    </div>
+  </section>
+  <section>
+    <h5>Phylogenetics reveals underlying transmission process</h5>
+    <div
+      class="fig-container"
+      data-preload
+      data-file="/assets/talks/assets/images/ebola-2018/talkified_figure/ebola-2018.html"
+    ></div>
+  </section>
+
+  <section>
+    <h3>Future directions</h3>
+    <div>
+      <div class="col-50">
+        <h4>Phylodynamics for epidemiological forecasting</h4>
+        <img src="/assets/talks/assets/images/20240822.forecasts.png" />
+      </div>
+      <div class="col-50 fragment">
+        <h4>Multi-pathogen models of viral surveillance</h4>
+        <img src="/assets/talks/assets/images/20240822.sfs.png" />
+        <div class="citation">
+          <p>SFS</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</section>
+
+<section>
+  <section class="title-slide">
+    <h4>Phylogenetic methods in pandemic-sized datasets</h4>
+  </section>
+
+  <section>
+    <h3>Increased efficiency with simplified likelihood</h3>
+    <div class="row">
+      <div class="r-stack">
+        <img
+          class="fragment fade-out"
+          data-fragment-index="0"
+          src="/assets/talks/assets/images/thorneyBeast/BAYES_setup.png"
+        />
+        <img
+          class="fragment"
+          data-fragment-index="0"
+          src="/assets/talks/assets/images/thorneyBeast/bayesian_throney_phylogeo.png"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h3>Tractable phylogenetics for the pandemic</h3>
+    <div class="row">
+      <div class="row">
+        <div class="col-50">
+          <p>Computational time</p>
+          <img src="/assets/talks/assets/images/thorneyBeast/speed.png" />
+        </div>
+        <div class="col-50">
+          <p>Memory usage</p>
+          <img src="/assets/talks/assets/images/thorneyBeast/memory.png" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h3>Within-country spread</h3>
+    <div class="row" style="margin-right: 85px">
+      <img
+        height="400px"
+        src="/assets/talks/assets/images/delta/Figure_3.png"
+      />
+    </div>
+    <div class="citation">
+      <p>McCrone <em>et al.</em>, 2022</p>
+    </div>
+  </section>
+
+  <section>
+    <h3>Future directions</h3>
+    <div>
+      <div class="col-50">
+        <h4>Strengths and limitations of simple approximations</h4>
+        <img
+          src="/assets/talks/assets/images/20240822-tb-sims.png"
+          width="700px"
+        />
+        <div style="margin-left: 80%">
+          <img
+            src="/assets/images/team/ccopeland_photo_square.jpeg"
+            style="border-radius: 50%"
+            width="150px"
+          />
+          <p style="font-size: x-small; margin-top: -25px">
+            Conner - Bioinformatic analyst
+          </p>
+        </div>
+      </div>
+      <div class="col-50 fragment">
+        <h4>Efficient exploration of tree space</h4>
+        <img
+          src="/assets/talks/assets/images/20220822-hyperbolic-tree-space.jpg"
+          width="400px"
+        />
+        <div class="citation">
+          <p>Matsumoto et al., 2021</p>
+        </div>
+        <div style="margin-left: 80%">
+          <img
+            src="/assets/images/team/kc.png"
+            style="border-radius: 50%"
+            width="150px"
+          />
+          <p style="font-size: x-small; margin-top: -25px">
+            Kieran (right)- Postdoc
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</section>
+
+<section>
+  <section class="title-slide">
+    <h4>Virus evolution within and between humans hosts</h4>
+  </section>
+  <section>
+    <h4>RNA virus evolution - Go extinct another day</h4>
+    <div class="row" style="margin-top: 70px">
+      <div class="col-50">
+        <ul style="font-size: 0.5em">
+          <li>Error prone RNA dependent RNA polymerase</li>
+          <li>
+            High mutation rate (~10<sup>-4</sup>) mutations/nucleotide
+            replicated (~1 mutation in every genome)
+          </li>
+          <li>
+            Rapid, adaptive evolution thwarts antiviral drugs, vaccine programs,
+            and prior immunity.
+          </li>
+        </ul>
+      </div>
+      <div class="col-30" style="margin-left: 60px" ;>
+        <img src="/assets/talks/assets/images/bond.jpg" />
+      </div>
+    </div>
+    <div class="citation">
+      <p>Credit: Adam Lauring</p>
+    </div>
+  </section>
+
+  <section>
+    <h4>Transmission imposes a strict bottleneck</h4>
+    <div class="row" style="margin-top: 100px; margin-right: 85px">
+      <img src="/assets/talks/assets/images/bottleneck.jpg" height="400px" />
+    </div>
+  </section>
+
+  <section>
+    <h3>Each infection is an independent exploration of sequence space</h3>
+    <img
+      src="/assets/talks/assets/images/20240822-ftiness.landscape.png"
+      height="500px"
+    />
+
+    <div class="citation">
+      <p>By Randy Olson - Own work, CC BY-SA 3.0</p>
+    </div>
+  </section>
+
+  <section>
+    <h3>Future directions</h3>
+    <div>
+      <div class="col-50">
+        <h4>Simple approaches</h4>
+        <img
+          src="/assets/talks/assets/images/20240822-flu.jpg"
+          height="300px"
+        />
+        <div class="citation">Xue and Bloom, 2020</div>
+      </div>
+      <div class="col-50 fragment">
+        <h4>New models</h4>
+        <img
+          src="/assets/talks/assets/images/20240822-mashedUpNN.png"
+          height="400px"
+        />
+        <div class="citation">Benegas et al., 2024 and Sanabria et al. 2023</div>
+      </div>
+    </div>
+
+    <div style="position:absolute;margin-left:10%;margin-top:350px">
+      <img
+        src="/assets/images/team/co.jpg"
+        style="border-radius: 50%"
+        width="150px"
+      />
+      <p style="font-size: x-small; margin-top: -25px">
+        Cristian - Grad student
+      </p>
+    </div>
+  </section>
+</section>
+
+<section>
+  <h2>The McCrone lab</h2>
+  <img src="/assets/talks/assets/images/future_work.2024.png" />
+</section>
+
+<section>
+  <section class="title-slide">
+    <h2>Ebola latency</h2>
+  </section>
+
+  <section>
+    <h3>Ebola virus</h3>
+    <div>
+      <div class="col-40" style="font-size: 0.8em; margin-top: 2em">
+        <ul>
+          <li>(-) sense RNA virus ~18 Kb genome</li>
+          <li>
+            17 independent spillover events from a poorly characterized reservoir
+          </li>
+          <li>
+            Wide-spread mortality observed among great apes in Gabon and the Republic of Congo during the 1990s
+          </li>
+          <li>
+            Anti-Ebola antibodies and viral RNA have been detected in multiple bat
+            species
+          </li>
+        </ul>
+      </div>
+      <div class="col-60">
+        <div
+        class="fig-container"
+        data-file="/assets/talks/assets/images/ebolaOutbreakMap/no_transition.html"
+        data-preload
+        data-style="height: {{page.fig-height}}; width: {{page.fig-width}}; margins:auto"
+        data-scroll="no"
+      ></div>
+      </div>
+    </div>
   </section>
   
   
-    <section>
-      <section class="title-slide">
-        <h4>Realtime outbreak investigation</h4>
-      </section>
-      <section>
-        <h5>Phylogenetics reveals underlying transmission process</h5>
+  <section>
+    <h3>Ebola evolution in humans</h3>
+    <div
+      class="fig-container"
+      data-file="/assets/talks/assets/images/ebolaWArtt-latency/2024-05-23.html"
+      data-preload
+      data-style="height: {{page.fig-height}}; width: {{page.fig-width}}; margins:auto"
+      data-scroll="no"
+    ></div>
+    <div class="citation">
+      <p>Keita, A. K, et al., 2021</p>
+    </div>
+  </section>
+  
+  
+  
+  <section>
+    <h3>Rate heterogeneity between outbreaks follows a similar pattern </h3>
+    <div
+      class="fig-container"
+      data-file="/assets/talks/assets/images/ebolaRTTExploration/2024-05-23.html"
+      data-preload
+      data-style="height: {{page.fig-height}}; width: {{page.fig-width}}; margins:auto"
+      data-scroll="no"
+    ></div>
+  </section>
+  
+  
+  
+  <section>
+    <h3>A latent branch-rate model</h3>
+  
+    <div
+      class="fig-container"
+      data-file="/assets/talks/assets/images/latencyModel.html"
+      data-style="height: 300px; width: 900px; margins:auto"
+      data-scroll="no"
+    ></div>
+    <div style="margin-top: 10px">
+      <div class="col-50">
+        <p style="margin-top: 50px">
+          evolutionary rate = <span style="color: #a3b9cc">0</span>|
+          <span style="color: #08306b">&mu;</span>
+        </p>
+      </div>
+      <div class="col-50">
+        <p>
+          <span style="color: #a3b9cc">latent</span> $
+          \overset{\mbox{$\lambda$}}{\Leftrightarrow}$
+          <span style="color: #08306b">replicating</span>
+        </p>
+      </div>
+    </div>
+  </section>
+  
+  
+  <section>
+    <h3>Latent branches date back to initial epidemic wave</h3>
+    <div
+      class="fig-container"
+      data-file="/assets/talks/assets/images/ebola17Latency/humanRatePrior.html"
+      data-preload
+      data-style="height: {{page.fig-height}}; width: {{page.fig-width}}; margins:auto"
+      data-scroll="no"
+    ></div>
+  </section>
+  
+  
+  <section>
+    <h3>Geographic implications of 'slow-down' events</h3>
+    <div
+      class="fig-container"
+      data-file="/assets/talks/assets/images/ebola17Latency/mapAndTree_humanRate.html"
+      data-preload
+      data-style="height: {{page.fig-height}}; width: {{page.fig-width}}; margins:auto"
+      data-scroll="no"
+    ></div>
+  </section>
+  
+  <section>
+    <h3>Simulations suggest more latent lineages exist</h3>
+  
         <div
-          class="fig-container"
-          data-preload
-          data-file="/assets/talks/assets/images/ebola-2018/talkified_figure/ebola-2018.html"
-        ></div>
-      </section>
-    </section>
+        class="fig-container"
+        data-file="/assets/talks/assets/images/ebola-sdevo/latentModel.html"
+        data-preload
+        data-style="height: {{page.fig-height}}; width: {{page.fig-width}}; margins:auto"
+        data-scroll="no"
+      ></div>    
+  </section>
   
-    <section>
-      <section class="title-slide">
-        <h4>Phylogenetic methods in pandemic-sized datasets</h4>
-      </section>
+  <section>
+    <h3>Hypothesis: Ebola dynamics in the reservoir</h3>
+    <div>
+      <div class="col-50" style="font-size: 0.8em; margin-top: 3em">
+        <ul>
+          <li>Active transmission from 1970-2014 seeding latent infections</li>
+          <li>
+            Recent outbreaks (2014-present) stem from reactivated infections
+          </li>
+          <li>Long-lived reservoir host</li>
+          <li>Dynamic spill-over threat</li>
+          <li>Unknown mechanism for latency</li>
+        </ul>
+      </div>
+      <div class="col-50">
+        <img src="/assets/talks/assets/images/oscillating.svg" />
+      </div>
+    </div>
+    <div
+      class="fragment"
+      style="position: absolute; margin-top: 3em; margin-left: 25%"
+    >
+      <img
+        src="/assets/talks/assets/images/vert-transmission.png"
+        style="border: 5px solid #a3b9cc"
+      />
+    </div>
+  </section>
   
-      <section>
-        <h3>Tractable phylogenetics for the pandemic</h3>
-        <div class="row">
-          <div class="row">
-            <div class="col-50">
-              <p>Computational time</p>
-              <img src="/assets/talks/assets/images/thorneyBeast/speed.png" />
-            </div>
-            <div class="col-50">
-              <p>Memory usage</p>
-              <img src="/assets/talks/assets/images/thorneyBeast/memory.png" />
-            </div>
+  
+  <section>
+    <h2>Thank you</h2>
+    <div style="display: flex; flex-direction: column">
+      <div class="row">
+        <div class="col-30 thanks">
+          <p>University of Edinburgh</p>
+          <ul>
+            <li>Andrew Rambaut</li>
+            <li style="font-weight: bold">Ifeayni Omah</li>
+            <li >Verity Hill</li>
+            <li>Ben Jackson</li>
+            <li>Áine O'Toole</li>
+            <li>Rachel Colquhoun</li>
+            <li>Emily Scher</li>
+            <li>Shawn Yu</li>
+            <li>Guy Baele -KU Leuven</li>
+  
+          </ul>
+        </div>
+  
+        <!-- <div class="col-30 thanks">
+          <p>Oxford</p>
+          <ul>
+            <li>Louis du Plessis</li>
+            <li>Alex Zarebski</li>
+            <li>Oliver Pybus</li>
+            <li>Moritz Kramer</li>
+            <li>Sumali Bajaj</li>
+            <li>Rosario Dawson</li>
+            <li>Chris Ruis</li>
+          </ul>
+        </div> -->
+  
+        <div class="col-30 thanks">
+          <p>McCrone lab</p>
+          <ul>
+            <li>Conner Copeland</li>
+            <li>Cristian Ovadiuc</li>
+            <li>Kieran Collienne</li>
+          </ul>
+          <br />
+          <p>Bedford lab</p>
+          <ul>
+            <li>Nicola Muller</li>
+          </ul>
+        </div>
+        <div class="col-30 thanks">
+          <p>Matsen Group</p>
+          <ul>
+            <li>Eric Matsen</li>
+            <li>Joseph Brew</li>
+          </ul>
+        </div>
+  
+      </div>
+  
+  
+      <div class="thanks" style="margin-top: -10px">
+        <div class="logo-footer">
+          <div class="col-20">
+            <img src="/assets/talks/assets/images/UE.jpg" "/>
+          </div>
+          <div class="col-20">
+            <img src="/assets/talks/assets/images/artic.png" />
+          </div>
+          <div class="col-20">
+            <img src="/assets/talks/assets/images/wellcome-logo-red-small.png" />
+          </div>
+          <div class="col-20">
+            <img src="/assets/talks/assets/images/fh.png" />
           </div>
         </div>
-      </section>
-  
-      <section>
-        <h3>Within-country spread</h3>
-        <div class="row" style="margin-right: 85px">
-          <img
-            height="400px"
-            src="/assets/talks/assets/images/delta/Figure_3.png"
-          />
-        </div>
-        <div class="citation">
-          <p>McCrone <em>et al.</em>, 2022</p>
-        </div>
-      </section>
-    </section>
-    
-    <section>
-      <section class="title-slide">
-        <h4>Virus evolution within and between humans hosts</h4>
-      </section>
-      <section>
-        <h4>RNA virus evolution - Go extinct another day</h4>
-        <div class="row" style="margin-top: 70px">
-          <div class="col-50">
-            <ul style="font-size: 0.5em">
-              <li>Error prone RNA dependent RNA polymerase</li>
-              <li>
-                High mutation rate (~10<sup>-4</sup>) mutations/nucleotide
-                replicated (~1 mutation in every genome)
-              </li>
-              <li>
-                Rapid, adaptive evolution thwarts antiviral drugs, vaccine
-                programs, and prior immunity.
-              </li>
-            </ul>
-          </div>
-          <div class="col-30" style="margin-left: 60px" ;>
-            <img src="/assets/talks/assets/images/bond.jpg" />
-          </div>
-        </div>
-        <div class="citation">
-          <p>Credit: Adam Lauring</p>
-        </div>
-      </section>
+      </div>
+    </div>
+  </section>
 
-      <section>
-        <h4>Each infection is a new roll of the dice</h4>
-        <div class="row" style="margin-top: 100px; margin-right: 85px">
-          <img src="/assets/talks/assets/images/bottleneck.jpg" height="400px" />
-        </div>
-      </section>
-    </section>
+</section>

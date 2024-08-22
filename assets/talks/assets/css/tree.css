@@ -1,0 +1,70 @@
+.branch .branch-path {
+    fill: none;
+    /*stroke: #541753;*/
+    /*stroke-width: 2px;*/
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    cursor: pointer;
+}
+
+.branch.hovered .branch-path {
+    stroke-width: 4px;
+}
+
+.node{
+    cursor: pointer;
+}
+.node-background{
+    cursor: pointer;
+}
+
+text {
+    font-family: "helvetica-neue",  "helvetica",  "sans-serif";
+    font-size: 12pt;
+    /*font-weight: bold;*/
+}
+
+.node-label {
+    font-family: "helvetica-neue",  "helvetica",  "sans-serif";
+    font-size: 10pt;
+    font-weight: 300;
+}
+
+
+.axis text {
+    font-family: "helvetica-neue",  "helvetica",  "sans-serif";
+    font-size: 12pt;
+    font-weight: 300;
+}
+
+.axis-label text {
+    font-family: "helvetica-neue",  "helvetica",  "sans-serif";
+    font-size: 12pt;
+    font-weight: bold;
+}
+
+.node-label.support {
+    font-size: 10pt;
+}
+
+.branch-label.length {
+    /*display: none;*/
+    font-size: 8pt;
+}
+
+#tooltip {
+    background: #F6EECA;
+    border: 1px solid #005C68;
+    color: #005C68;
+    border-radius: 5px;
+    padding: 5px;
+    font-family: "helvetica-neue",  "helvetica",  "sans-serif";
+    font-size: 12pt;
+    font-weight: 300;
+}
+.figure-div{
+    text-align:center;
+}
+.hidden{
+    visibility: hidden;
+    transition: visibility 0s, }
