@@ -6,6 +6,7 @@ github: jtmccr1
 # scholar: mztCjxEAAAAJ
 image: /assets/images/team/jt.jpg 
 order: 0
+current: true
 ---
 
 I am an Assistant Professor at the Fred Hutch Cancer Center. 

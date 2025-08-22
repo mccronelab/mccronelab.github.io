@@ -6,6 +6,7 @@ github: connercopeland
 # scholar:
 image: /assets/images/team/ccopeland_photo.jpeg 
 order: 1
+current: true
 ---
 
 I am a Bioinformatic Analyst II at Fred Hutchinson Cancer Center, under the BBE program in the Vaccines and Infectious Diseases Division. 

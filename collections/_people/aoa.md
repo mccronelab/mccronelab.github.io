@@ -5,6 +5,7 @@ position: PhD Student
 github: aoakin
 image: /assets/images/team/aoa.jpg
 order: 4
+current: true
 ---
 
 I am a PhD Student in the Genome Sciences program at the University of Washington.

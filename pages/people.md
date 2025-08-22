@@ -38,7 +38,26 @@ title: People
   }
 </style>
 
-{% assign sorted_people = site.people | sort: "order" %}
+# Current Members
+{% assign sorted_people = site.people | where: "current", true | sort: "order" %}
+{% for person in sorted_people %}
+<div class="person">
+  <div class="person-photo">
+    <img src="{{person.image}}" alt="{{person.name}} image" />
+  </div>
+  <div class="person-info">
+    <div class="name">
+      {{ person.name }}
+    </div>
+    <div class="blerb">
+      {{ person.content | markdownify }}
+    </div>
+  </div>
+</div>
+{% endfor %}
+
+# Past members
+{% assign sorted_people = site.people | where: "current", false | sort: "order" %}
 {% for person in sorted_people %}
 <div class="person">
   <div class="person-photo">

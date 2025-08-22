@@ -5,6 +5,7 @@ position: Postdoc
 github: kollienne
 image: /assets/images/team/kc.jpg
 order: 3
+current: true
 ---
 
 Post-Doctoral Research Fellow.

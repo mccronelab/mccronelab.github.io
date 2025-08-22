@@ -6,7 +6,10 @@ github: lab01atgc
 # scholar: mztCjxEAAAAJ
 image: /assets/images/team/co.jpg 
 order: 2
+current: false
 ---
+
+_Cristian is currently a researcher at Microsoft AI Red Team._
 
 I am currently pursuing a Ph.D. in Public Health Genetics ([data science/ml track](https://escience.washington.edu/data-science-learning/data-science-at-uw/grad-students/grad-options/)) at the University of Washington in the [McCrone](https://mccronelab.github.io/) and [Bedford](https://bedford.io/) labs under the joint mentorship of [Dr. JT McCrone](https://www.fredhutch.org/en/faculty-lab-directory/mccrone-john.html) and [Dr. Trevor Bedford](https://www.fredhutch.org/en/faculty-lab-directory/bedford-trevor.html). 
 
