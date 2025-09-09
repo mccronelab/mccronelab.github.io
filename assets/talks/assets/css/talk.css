@@ -311,6 +311,14 @@ section div *[class*='col-'] {
 .col-100 {
   width: 100%; }
 
+.container{
+  display: flex;
+}
+.col {
+  flex: 1;
+}
+
+
 .citation {
   font-size: 0.5em;
   font-style: italic;
@@ -320,6 +328,16 @@ section div *[class*='col-'] {
   right:5%;
   color: #888; }
 
+  .reveal h1.override {
+  font-size: 4rem;
+  max-width: 9300px;
+}
+.reveal h2.override {
+  font-size: 2.6rem;
+}
+.reveal h3.override {
+  font-size: 2.2rem;
+}
 
 .thanks ul  {
     display: list-item;
